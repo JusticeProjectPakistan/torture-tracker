@@ -22,23 +22,23 @@ Currently, all Github services referenced herein are free, while the Amazon AWS 
 
 ### Narrative
 
-[https://justiceprojectpakistan.github.io/torture-tracker/](https://justiceprojectpakistan.github.io/torture-tracker/)
+[https://justiceprojectpakistan.github.io/torture-tracker/frontend](https://justiceprojectpakistan.github.io/torture-tracker/frontend) 
 
 This section contains the user-facing narrative content provided by JPP.  It contains a visualization based on the database aggregates (containing survey answers) , a tracker timeline, and a link to the survey.
 
 
 ### Timeline tracker
 
-Content Document: [https://docs.google.com/spreadsheets/d/e/2PACX-1vTKtRb2tYlDYZKEuMc_-tMIMmooklGuL6Nk2dCygMPUWG92qYJ4YTRoW6lsNRCPno6dlnvRJt7iu7E_/pubhtml](https://docs.google.com/spreadsheets/d/e/2PACX-1vTKtRb2tYlDYZKEuMc_-tMIMmooklGuL6Nk2dCygMPUWG92qYJ4YTRoW6lsNRCPno6dlnvRJt7iu7E_/pubhtml) 
+Content Document: [https://docs.google.com/spreadsheets/d/1RTAaPXhXk20dgXLVdxJdK_aSICMAi_LPeCytplb04Is](https://docs.google.com/spreadsheets/d/1RTAaPXhXk20dgXLVdxJdK_aSICMAi_LPeCytplb04Is) 
 
 This tool, having already been used at JPP, is hopefully one that you are already familiar with.  Essentially, a Google sheet is formatted and made public to serve as the source feed for the timeline component contained in the narrative.  Functionally, it will provide a way for JPP administrators to highlight inflection points in the struggles of torture victims. See the document link above or the component website for more information. [https://timeline.knightlab.com/index.html#overview](https://timeline.knightlab.com/index.html#overview) 
 
 
 ### Survey
 
-User: [https://justiceprojectpakistan.github.io/torture-tracker/html/survey.html](https://justiceprojectpakistan.github.io/torture-tracker/html/survey.html) 
+User: [https://justiceprojectpakistan.github.io/torture-tracker/frontend/html/survey.html](https://justiceprojectpakistan.github.io/torture-tracker/frontend/html/survey.html) 
 
-Contributor: [https://justiceprojectpakistan.github.io/torture-tracker/html/survey.html?allQuestions](https://justiceprojectpakistan.github.io/torture-tracker/html/survey.html?allQuestions)
+Contributor: [https://justiceprojectpakistan.github.io/torture-tracker/frontend/html/survey.html?allQuestions](https://justiceprojectpakistan.github.io/torture-tracker/frontend/html/survey.html?allQuestions) 
 
 Two different forms of the survey were requested.  Currently, there is a shorter user survey and a survey for collaborating organizations which contains all the survey questions.  Once submitted both user and collaboration surveys are entered into the (AWS DynamoDB) database and can be reviewed on the relevant Amazon console.  While many survey questions require free-form text responses, and are therefore readable in the database, all multiple choice questions are saved as their respective enumeration.  Eg: The value for gender can be one of Female, Male, or Other.  From the user’s perspective they would see the English or Urdu text, the database however would contain a 0,1,or 2 respectively.
 
@@ -47,7 +47,7 @@ Two different forms of the survey were requested.  Currently, there is a shorter
 
 ### DB Administration
 
-[https://justiceprojectpakistan.github.io/torture-tracker/html/admin.html](https://justiceprojectpakistan.github.io/torture-tracker/html/admin.html) 
+[https://justiceprojectpakistan.github.io/torture-tracker/frontend/html/admin.html](https://justiceprojectpakistan.github.io/torture-tracker/frontend/html/admin.html)
 
 This interface allows you to create, read, update, and delete rows from the database.  When the page loads, an empty table is displayed.  From this point, rows can be created, or alternatively synced from the database to the table by clicking the appropriate button.  To, update or delete a row, sync the table, select the row and click the appropriate button. Once synced, the rows can be sorted, filtered, exported (JSON or CSV), and aggregated (_see Aggregate Viewer_). 
 
@@ -100,8 +100,7 @@ This is an account which was used to register the GitHub account and which conta
 
 ### GitHub Resources 
 
-
-### [https://github.com/JusticeProjectPakistan?tab=repositories](https://github.com/JusticeProjectPakistan?tab=repositories) 
+[https://github.com/JusticeProjectPakistan?tab=repositories](https://github.com/JusticeProjectPakistan?tab=repositories) 
 
 This is an account which contains all web-facing public resources including but not limited to images, html documents, maps, aggregate data, and JavaScript code.  All repo data is available to the public and governed by the MIT license.
 
