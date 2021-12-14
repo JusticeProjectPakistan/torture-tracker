@@ -103,7 +103,7 @@ if (urlSearchParams.has('vis-data')) {
 }
 
 // init timeline
-let tlURL = `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=2PACX-1vQyTnfgmxdJZu_Bk9HXUMBqLQCB3InHGaWlng9RHIUtOd-JveeGnTA8mZ2kxniJXpiMYh45CwdC2mk9&font=Default&lang=en&initial_zoom=2&height=650`;
+let tlURL = `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=1RTAaPXhXk20dgXLVdxJdK_aSICMAi_LPeCytplb04Is&font=Default&lang=en&initial_zoom=2&height=650`;
 let timeline = document.querySelector('iframe')
 if (timeline) timeline.setAttribute('src', tlURL);
 
