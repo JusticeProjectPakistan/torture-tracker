@@ -1,9 +1,10 @@
 import SurveyUtil from "./survey.js"
 import { mergeDeep, pGet, pSet } from "./util.js"
 import "../../backend/js/entry.js"
+import { rootUrl } from "./common.js"
 
 // AWS IAM XMLHTTPREQ
-let url = 'https://4z4ntfa3oi.execute-api.us-east-1.amazonaws.com/dev/v1/incident';
+let url = rootUrl + '/incident';
 let lang = navigator.language.endsWith('-UR') ? 'ur' : 'en';
 
 // GET SECRET KEYS
@@ -301,7 +302,7 @@ function bump(obj, path) {
 function aggregate() {
   let sparseAggregate = {};
   let data = $table.bootstrapTable('getData');
-  data = data.filter(d => (d.region || '').length) //  && d.status == "reviewed") 
+  data = data.filter(d => (d.region || '').length && d.status == "reviewed");
   if (!data.length)
     return false;
 

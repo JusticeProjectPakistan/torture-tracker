@@ -18,11 +18,11 @@
             "dynamodb:UpdateItem",
             "dynamodb:DeleteItem"
           ],
-          "Resource": "arn:aws:dynamodb:us-east-1:535731777980:table/torture-incidents-dev"
+          "Resource": "arn:aws:dynamodb:us-east-1:535731777980:table/torture-incidents-production"
         }
       ],
       "environment": {
-        "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
+        "DYNAMODB_INCIDENT_TABLE": "torture-incidents-production"
       },
       "stage": "dev",
       "region": "us-east-1",
@@ -103,37 +103,31 @@
           "HelloLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/torture-dev-hello"
-            }
-          },
-          "ByRegionLogGroup": {
-            "Type": "AWS::Logs::LogGroup",
-            "Properties": {
-              "LogGroupName": "/aws/lambda/torture-dev-byRegion"
+              "LogGroupName": "/aws/lambda/torture-production-hello"
             }
           },
           "SubmitSurveyLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/torture-dev-submitSurvey"
+              "LogGroupName": "/aws/lambda/torture-production-submitSurvey"
             }
           },
           "CreateLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/torture-dev-create"
+              "LogGroupName": "/aws/lambda/torture-production-create"
             }
           },
           "ListLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/torture-dev-list"
+              "LogGroupName": "/aws/lambda/torture-production-list"
             }
           },
           "DeleteLogGroup": {
             "Type": "AWS::Logs::LogGroup",
             "Properties": {
-              "LogGroupName": "/aws/lambda/torture-dev-delete"
+              "LogGroupName": "/aws/lambda/torture-production-delete"
             }
           },
           "IamRoleLambdaExecution": {
@@ -162,7 +156,7 @@
                       "-",
                       [
                         "torture",
-                        "dev",
+                        "production",
                         "lambda"
                       ]
                     ]
@@ -178,7 +172,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/torture-dev*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/torture-production*:*"
                           }
                         ]
                       },
@@ -189,7 +183,7 @@
                         ],
                         "Resource": [
                           {
-                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/torture-dev*:*:*"
+                            "Fn::Sub": "arn:${AWS::Partition}:logs:${AWS::Region}:${AWS::AccountId}:log-group:/aws/lambda/torture-production*:*:*"
                           }
                         ]
                       },
@@ -206,7 +200,7 @@
                   "-",
                   [
                     "torture",
-                    "dev",
+                    "production",
                     {
                       "Ref": "AWS::Region"
                     },
@@ -223,16 +217,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z/torture.zip"
+                "S3Key": "serverless/torture/production/1639492230784-2021-12-14T14:30:30.784Z/torture.zip"
               },
               "Handler": "handler.hello",
               "Runtime": "nodejs12.x",
-              "FunctionName": "torture-dev-hello",
+              "FunctionName": "torture-production-hello",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
+                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-production"
                 }
               },
               "Role": {
@@ -246,36 +240,6 @@
               "HelloLogGroup"
             ]
           },
-          "ByRegionLambdaFunction": {
-            "Type": "AWS::Lambda::Function",
-            "Properties": {
-              "Code": {
-                "S3Bucket": {
-                  "Ref": "ServerlessDeploymentBucket"
-                },
-                "S3Key": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z/torture.zip"
-              },
-              "Handler": "handler.byRegion",
-              "Runtime": "nodejs12.x",
-              "FunctionName": "torture-dev-byRegion",
-              "MemorySize": 1024,
-              "Timeout": 6,
-              "Environment": {
-                "Variables": {
-                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
-                }
-              },
-              "Role": {
-                "Fn::GetAtt": [
-                  "IamRoleLambdaExecution",
-                  "Arn"
-                ]
-              }
-            },
-            "DependsOn": [
-              "ByRegionLogGroup"
-            ]
-          },
           "SubmitSurveyLambdaFunction": {
             "Type": "AWS::Lambda::Function",
             "Properties": {
@@ -283,16 +247,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z/torture.zip"
+                "S3Key": "serverless/torture/production/1639492230784-2021-12-14T14:30:30.784Z/torture.zip"
               },
               "Handler": "handler.create",
               "Runtime": "nodejs12.x",
-              "FunctionName": "torture-dev-submitSurvey",
+              "FunctionName": "torture-production-submitSurvey",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
+                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-production"
                 }
               },
               "Role": {
@@ -313,16 +277,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z/torture.zip"
+                "S3Key": "serverless/torture/production/1639492230784-2021-12-14T14:30:30.784Z/torture.zip"
               },
               "Handler": "handler.create",
               "Runtime": "nodejs12.x",
-              "FunctionName": "torture-dev-create",
+              "FunctionName": "torture-production-create",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
+                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-production"
                 }
               },
               "Role": {
@@ -343,16 +307,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z/torture.zip"
+                "S3Key": "serverless/torture/production/1639492230784-2021-12-14T14:30:30.784Z/torture.zip"
               },
               "Handler": "handler.list",
               "Runtime": "nodejs12.x",
-              "FunctionName": "torture-dev-list",
+              "FunctionName": "torture-production-list",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
+                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-production"
                 }
               },
               "Role": {
@@ -373,16 +337,16 @@
                 "S3Bucket": {
                   "Ref": "ServerlessDeploymentBucket"
                 },
-                "S3Key": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z/torture.zip"
+                "S3Key": "serverless/torture/production/1639492230784-2021-12-14T14:30:30.784Z/torture.zip"
               },
               "Handler": "handler.delete",
               "Runtime": "nodejs12.x",
-              "FunctionName": "torture-dev-delete",
+              "FunctionName": "torture-production-delete",
               "MemorySize": 1024,
               "Timeout": 6,
               "Environment": {
                 "Variables": {
-                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-dev"
+                  "DYNAMODB_INCIDENT_TABLE": "torture-incidents-production"
                 }
               },
               "Role": {
@@ -396,70 +360,60 @@
               "DeleteLogGroup"
             ]
           },
-          "HelloLambdaVersionofwQCgEn3z9DhualIlSvlr1FlX94WYnYnGL2VNbBXI": {
+          "HelloLambdaVersionNtTrp5hy2rtoRbWoXY3Qne7BB0whgoZO6cKRQ4coH8": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "HelloLambdaFunction"
               },
-              "CodeSha256": "YEuobTKnSS3+uvX4htMzwA0VgLojyGV17FLD0TzdVO4="
+              "CodeSha256": "4XcDfn815eXXos0vl5F7LywMg4qqWhlkhcyJcGG2iO4="
             }
           },
-          "ByRegionLambdaVersionkeI5nKjS4bm7m9msjV7n6D8R97KW83YbEHGfYoNIrs": {
-            "Type": "AWS::Lambda::Version",
-            "DeletionPolicy": "Retain",
-            "Properties": {
-              "FunctionName": {
-                "Ref": "ByRegionLambdaFunction"
-              },
-              "CodeSha256": "YEuobTKnSS3+uvX4htMzwA0VgLojyGV17FLD0TzdVO4="
-            }
-          },
-          "SubmitSurveyLambdaVersionPxbZaG7RVFm7QBpCksSOjaj5mDgEv2uD1sdU8geg6zc": {
+          "SubmitSurveyLambdaVersion0TFHAJu6jU86RrI9roY7IhFyAdabhKyd58i7YZ0tN5w": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "SubmitSurveyLambdaFunction"
               },
-              "CodeSha256": "YEuobTKnSS3+uvX4htMzwA0VgLojyGV17FLD0TzdVO4="
+              "CodeSha256": "4XcDfn815eXXos0vl5F7LywMg4qqWhlkhcyJcGG2iO4="
             }
           },
-          "CreateLambdaVersionQDMJWqVopUwMCwqWRt9BjnFbW3i9QGe1mXpmDsScbw": {
+          "CreateLambdaVersionczhgZNPEqGp5sbOU7qFojD4FNBeaMKFyyGX56wlGI": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "CreateLambdaFunction"
               },
-              "CodeSha256": "YEuobTKnSS3+uvX4htMzwA0VgLojyGV17FLD0TzdVO4="
+              "CodeSha256": "4XcDfn815eXXos0vl5F7LywMg4qqWhlkhcyJcGG2iO4="
             }
           },
-          "ListLambdaVersionI6MLWtas1xWrSqb66HaQIMq3VZyFbVxhtT78rrAnzE": {
+          "ListLambdaVersionEWZZb3UvWJn5LZ3OOb0JZDJiiZ3TyPGZM78z5U": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "ListLambdaFunction"
               },
-              "CodeSha256": "YEuobTKnSS3+uvX4htMzwA0VgLojyGV17FLD0TzdVO4="
+              "CodeSha256": "4XcDfn815eXXos0vl5F7LywMg4qqWhlkhcyJcGG2iO4="
             }
           },
-          "DeleteLambdaVersion39U0sDYZP4XbftDxhCNjI6WR2RoTeSoHhcqhaet14": {
+          "DeleteLambdaVersionuWcd4TfvyBNjjdWEmdKifKWo3cywWzAk8YMMaJk": {
             "Type": "AWS::Lambda::Version",
             "DeletionPolicy": "Retain",
             "Properties": {
               "FunctionName": {
                 "Ref": "DeleteLambdaFunction"
               },
-              "CodeSha256": "YEuobTKnSS3+uvX4htMzwA0VgLojyGV17FLD0TzdVO4="
+              "CodeSha256": "4XcDfn815eXXos0vl5F7LywMg4qqWhlkhcyJcGG2iO4="
             }
           },
           "ApiGatewayRestApi": {
             "Type": "AWS::ApiGateway::RestApi",
             "Properties": {
-              "Name": "dev-torture",
+              "Name": "production-torture",
               "EndpointConfiguration": {
                 "Types": [
                   "EDGE"
@@ -493,18 +447,6 @@
                 ]
               },
               "PathPart": "v1",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayResourceV1Byregion": {
-            "Type": "AWS::ApiGateway::Resource",
-            "Properties": {
-              "ParentId": {
-                "Ref": "ApiGatewayResourceV1"
-              },
-              "PathPart": "byRegion",
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               }
@@ -585,51 +527,6 @@
               },
               "ResourceId": {
                 "Ref": "ApiGatewayResourceHello"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              }
-            }
-          },
-          "ApiGatewayMethodV1ByregionOptions": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "AuthorizationType": "NONE",
-              "HttpMethod": "OPTIONS",
-              "MethodResponses": [
-                {
-                  "StatusCode": "200",
-                  "ResponseParameters": {
-                    "method.response.header.Access-Control-Allow-Origin": true,
-                    "method.response.header.Access-Control-Allow-Headers": true,
-                    "method.response.header.Access-Control-Allow-Methods": true
-                  },
-                  "ResponseModels": {}
-                }
-              ],
-              "RequestParameters": {},
-              "Integration": {
-                "Type": "MOCK",
-                "RequestTemplates": {
-                  "application/json": "{statusCode:200}"
-                },
-                "ContentHandling": "CONVERT_TO_TEXT",
-                "IntegrationResponses": [
-                  {
-                    "StatusCode": "200",
-                    "ResponseParameters": {
-                      "method.response.header.Access-Control-Allow-Origin": "'*'",
-                      "method.response.header.Access-Control-Allow-Headers": "'Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,X-Amz-User-Agent'",
-                      "method.response.header.Access-Control-Allow-Methods": "'OPTIONS,POST'"
-                    },
-                    "ResponseTemplates": {
-                      "application/json": ""
-                    }
-                  }
-                ]
-              },
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceV1Byregion"
               },
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
@@ -817,52 +714,6 @@
               "HelloLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayMethodV1ByregionPost": {
-            "Type": "AWS::ApiGateway::Method",
-            "Properties": {
-              "HttpMethod": "POST",
-              "RequestParameters": {},
-              "ResourceId": {
-                "Ref": "ApiGatewayResourceV1Byregion"
-              },
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "ApiKeyRequired": false,
-              "AuthorizationType": "NONE",
-              "Integration": {
-                "IntegrationHttpMethod": "POST",
-                "Type": "AWS_PROXY",
-                "Uri": {
-                  "Fn::Join": [
-                    "",
-                    [
-                      "arn:",
-                      {
-                        "Ref": "AWS::Partition"
-                      },
-                      ":apigateway:",
-                      {
-                        "Ref": "AWS::Region"
-                      },
-                      ":lambda:path/2015-03-31/functions/",
-                      {
-                        "Fn::GetAtt": [
-                          "ByRegionLambdaFunction",
-                          "Arn"
-                        ]
-                      },
-                      "/invocations"
-                    ]
-                  ]
-                }
-              },
-              "MethodResponses": []
-            },
-            "DependsOn": [
-              "ByRegionLambdaPermissionApiGateway"
-            ]
-          },
           "ApiGatewayMethodV1SubmitsurveyPost": {
             "Type": "AWS::ApiGateway::Method",
             "Properties": {
@@ -1047,22 +898,20 @@
               "DeleteLambdaPermissionApiGateway"
             ]
           },
-          "ApiGatewayDeployment1638876847928": {
+          "ApiGatewayDeployment1639492228422": {
             "Type": "AWS::ApiGateway::Deployment",
             "Properties": {
               "RestApiId": {
                 "Ref": "ApiGatewayRestApi"
               },
-              "StageName": "dev"
+              "StageName": "production"
             },
             "DependsOn": [
               "ApiGatewayMethodHelloOptions",
-              "ApiGatewayMethodV1ByregionOptions",
               "ApiGatewayMethodV1SubmitsurveyOptions",
               "ApiGatewayMethodV1IncidentOptions",
               "ApiGatewayMethodV1IncidentPkVarOptions",
               "ApiGatewayMethodHelloPost",
-              "ApiGatewayMethodV1ByregionPost",
               "ApiGatewayMethodV1SubmitsurveyPost",
               "ApiGatewayMethodV1IncidentPost",
               "ApiGatewayMethodV1IncidentGet",
@@ -1075,43 +924,6 @@
               "FunctionName": {
                 "Fn::GetAtt": [
                   "HelloLambdaFunction",
-                  "Arn"
-                ]
-              },
-              "Action": "lambda:InvokeFunction",
-              "Principal": "apigateway.amazonaws.com",
-              "SourceArn": {
-                "Fn::Join": [
-                  "",
-                  [
-                    "arn:",
-                    {
-                      "Ref": "AWS::Partition"
-                    },
-                    ":execute-api:",
-                    {
-                      "Ref": "AWS::Region"
-                    },
-                    ":",
-                    {
-                      "Ref": "AWS::AccountId"
-                    },
-                    ":",
-                    {
-                      "Ref": "ApiGatewayRestApi"
-                    },
-                    "/*/*"
-                  ]
-                ]
-              }
-            }
-          },
-          "ByRegionLambdaPermissionApiGateway": {
-            "Type": "AWS::Lambda::Permission",
-            "Properties": {
-              "FunctionName": {
-                "Fn::GetAtt": [
-                  "ByRegionLambdaFunction",
                   "Arn"
                 ]
               },
@@ -1294,7 +1106,7 @@
           "incidentsTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
-              "TableName": "torture-incidents-dev",
+              "TableName": "torture-incidents-production",
               "AttributeDefinitions": [
                 {
                   "AttributeName": "pk",
@@ -1309,41 +1121,6 @@
               ],
               "BillingMode": "PAY_PER_REQUEST"
             }
-          },
-          "tortureCognitoUserPool": {
-            "Type": "AWS::Cognito::UserPool",
-            "Properties": {
-              "UserPoolName": "torture-dev-user-pool"
-            }
-          },
-          "tortureCognitoUserPoolClient": {
-            "Type": "AWS::Cognito::UserPoolClient",
-            "Properties": {
-              "ClientName": "torture-dev-WebApp",
-              "GenerateSecret": false,
-              "UserPoolId": {
-                "Ref": "tortureCognitoUserPool"
-              }
-            }
-          },
-          "tortureApiGatewayAuthorizer": {
-            "Type": "AWS::ApiGateway::Authorizer",
-            "Properties": {
-              "Name": "torture-dev-authorizer",
-              "RestApiId": {
-                "Ref": "ApiGatewayRestApi"
-              },
-              "Type": "COGNITO_USER_POOLS",
-              "ProviderARNs": [
-                {
-                  "Fn::GetAtt": [
-                    "tortureCognitoUserPool",
-                    "Arn"
-                  ]
-                }
-              ],
-              "IdentitySource": "method.request.header.Authorization"
-            }
           }
         },
         "Outputs": {
@@ -1352,61 +1129,52 @@
               "Ref": "ServerlessDeploymentBucket"
             },
             "Export": {
-              "Name": "sls-torture-dev-ServerlessDeploymentBucketName"
+              "Name": "sls-torture-production-ServerlessDeploymentBucketName"
             }
           },
           "HelloLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "HelloLambdaVersionofwQCgEn3z9DhualIlSvlr1FlX94WYnYnGL2VNbBXI"
+              "Ref": "HelloLambdaVersionNtTrp5hy2rtoRbWoXY3Qne7BB0whgoZO6cKRQ4coH8"
             },
             "Export": {
-              "Name": "sls-torture-dev-HelloLambdaFunctionQualifiedArn"
-            }
-          },
-          "ByRegionLambdaFunctionQualifiedArn": {
-            "Description": "Current Lambda function version",
-            "Value": {
-              "Ref": "ByRegionLambdaVersionkeI5nKjS4bm7m9msjV7n6D8R97KW83YbEHGfYoNIrs"
-            },
-            "Export": {
-              "Name": "sls-torture-dev-ByRegionLambdaFunctionQualifiedArn"
+              "Name": "sls-torture-production-HelloLambdaFunctionQualifiedArn"
             }
           },
           "SubmitSurveyLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "SubmitSurveyLambdaVersionPxbZaG7RVFm7QBpCksSOjaj5mDgEv2uD1sdU8geg6zc"
+              "Ref": "SubmitSurveyLambdaVersion0TFHAJu6jU86RrI9roY7IhFyAdabhKyd58i7YZ0tN5w"
             },
             "Export": {
-              "Name": "sls-torture-dev-SubmitSurveyLambdaFunctionQualifiedArn"
+              "Name": "sls-torture-production-SubmitSurveyLambdaFunctionQualifiedArn"
             }
           },
           "CreateLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "CreateLambdaVersionQDMJWqVopUwMCwqWRt9BjnFbW3i9QGe1mXpmDsScbw"
+              "Ref": "CreateLambdaVersionczhgZNPEqGp5sbOU7qFojD4FNBeaMKFyyGX56wlGI"
             },
             "Export": {
-              "Name": "sls-torture-dev-CreateLambdaFunctionQualifiedArn"
+              "Name": "sls-torture-production-CreateLambdaFunctionQualifiedArn"
             }
           },
           "ListLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "ListLambdaVersionI6MLWtas1xWrSqb66HaQIMq3VZyFbVxhtT78rrAnzE"
+              "Ref": "ListLambdaVersionEWZZb3UvWJn5LZ3OOb0JZDJiiZ3TyPGZM78z5U"
             },
             "Export": {
-              "Name": "sls-torture-dev-ListLambdaFunctionQualifiedArn"
+              "Name": "sls-torture-production-ListLambdaFunctionQualifiedArn"
             }
           },
           "DeleteLambdaFunctionQualifiedArn": {
             "Description": "Current Lambda function version",
             "Value": {
-              "Ref": "DeleteLambdaVersion39U0sDYZP4XbftDxhCNjI6WR2RoTeSoHhcqhaet14"
+              "Ref": "DeleteLambdaVersionuWcd4TfvyBNjjdWEmdKifKWo3cywWzAk8YMMaJk"
             },
             "Export": {
-              "Name": "sls-torture-dev-DeleteLambdaFunctionQualifiedArn"
+              "Name": "sls-torture-production-DeleteLambdaFunctionQualifiedArn"
             }
           },
           "ServiceEndpoint": {
@@ -1427,24 +1195,12 @@
                   {
                     "Ref": "AWS::URLSuffix"
                   },
-                  "/dev"
+                  "/production"
                 ]
               ]
             },
             "Export": {
-              "Name": "sls-torture-dev-ServiceEndpoint"
-            }
-          },
-          "UserPoolId": {
-            "Description": "Cognito User Pool ID",
-            "Value": {
-              "Ref": "tortureCognitoUserPool"
-            }
-          },
-          "CognitoUserPoolClientId": {
-            "Description": "Cognito User Pool Client ID",
-            "Value": {
-              "Ref": "tortureCognitoUserPoolClient"
+              "Name": "sls-torture-production-ServiceEndpoint"
             }
           }
         }
@@ -1562,48 +1318,13 @@
             }
           }
         ],
-        "name": "torture-dev-hello",
+        "name": "torture-production-hello",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "HelloLambdaVersionofwQCgEn3z9DhualIlSvlr1FlX94WYnYnGL2VNbBXI"
-      },
-      "byRegion": {
-        "handler": "handler.byRegion",
-        "events": [
-          {
-            "http": {
-              "path": "v1/byRegion",
-              "method": "post",
-              "cors": {
-                "origin": "*",
-                "methods": [
-                  "OPTIONS",
-                  "POST"
-                ],
-                "headers": [
-                  "Content-Type",
-                  "X-Amz-Date",
-                  "Authorization",
-                  "X-Api-Key",
-                  "X-Amz-Security-Token",
-                  "X-Amz-User-Agent"
-                ],
-                "allowCredentials": false
-              },
-              "integration": "AWS_PROXY"
-            }
-          }
-        ],
-        "name": "torture-dev-byRegion",
-        "package": {},
-        "memory": 1024,
-        "timeout": 6,
-        "runtime": "nodejs12.x",
-        "vpc": {},
-        "versionLogicalId": "ByRegionLambdaVersionkeI5nKjS4bm7m9msjV7n6D8R97KW83YbEHGfYoNIrs"
+        "versionLogicalId": "HelloLambdaVersionNtTrp5hy2rtoRbWoXY3Qne7BB0whgoZO6cKRQ4coH8"
       },
       "submitSurvey": {
         "handler": "handler.create",
@@ -1632,13 +1353,13 @@
             }
           }
         ],
-        "name": "torture-dev-submitSurvey",
+        "name": "torture-production-submitSurvey",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "SubmitSurveyLambdaVersionPxbZaG7RVFm7QBpCksSOjaj5mDgEv2uD1sdU8geg6zc"
+        "versionLogicalId": "SubmitSurveyLambdaVersion0TFHAJu6jU86RrI9roY7IhFyAdabhKyd58i7YZ0tN5w"
       },
       "create": {
         "handler": "handler.create",
@@ -1672,13 +1393,13 @@
             }
           }
         ],
-        "name": "torture-dev-create",
+        "name": "torture-production-create",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "CreateLambdaVersionQDMJWqVopUwMCwqWRt9BjnFbW3i9QGe1mXpmDsScbw"
+        "versionLogicalId": "CreateLambdaVersionczhgZNPEqGp5sbOU7qFojD4FNBeaMKFyyGX56wlGI"
       },
       "list": {
         "handler": "handler.list",
@@ -1712,13 +1433,13 @@
             }
           }
         ],
-        "name": "torture-dev-list",
+        "name": "torture-production-list",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "ListLambdaVersionI6MLWtas1xWrSqb66HaQIMq3VZyFbVxhtT78rrAnzE"
+        "versionLogicalId": "ListLambdaVersionEWZZb3UvWJn5LZ3OOb0JZDJiiZ3TyPGZM78z5U"
       },
       "delete": {
         "handler": "handler.delete",
@@ -1752,13 +1473,13 @@
             }
           }
         ],
-        "name": "torture-dev-delete",
+        "name": "torture-production-delete",
         "package": {},
         "memory": 1024,
         "timeout": 6,
         "runtime": "nodejs12.x",
         "vpc": {},
-        "versionLogicalId": "DeleteLambdaVersion39U0sDYZP4XbftDxhCNjI6WR2RoTeSoHhcqhaet14"
+        "versionLogicalId": "DeleteLambdaVersionuWcd4TfvyBNjjdWEmdKifKWo3cywWzAk8YMMaJk"
       }
     },
     "resources": {
@@ -1766,7 +1487,7 @@
         "incidentsTable": {
           "Type": "AWS::DynamoDB::Table",
           "Properties": {
-            "TableName": "torture-incidents-dev",
+            "TableName": "torture-incidents-production",
             "AttributeDefinitions": [
               {
                 "AttributeName": "pk",
@@ -1781,57 +1502,9 @@
             ],
             "BillingMode": "PAY_PER_REQUEST"
           }
-        },
-        "tortureCognitoUserPool": {
-          "Type": "AWS::Cognito::UserPool",
-          "Properties": {
-            "UserPoolName": "torture-dev-user-pool"
-          }
-        },
-        "tortureCognitoUserPoolClient": {
-          "Type": "AWS::Cognito::UserPoolClient",
-          "Properties": {
-            "ClientName": "torture-dev-WebApp",
-            "GenerateSecret": false,
-            "UserPoolId": {
-              "Ref": "tortureCognitoUserPool"
-            }
-          }
-        },
-        "tortureApiGatewayAuthorizer": {
-          "Type": "AWS::ApiGateway::Authorizer",
-          "Properties": {
-            "Name": "torture-dev-authorizer",
-            "RestApiId": {
-              "Ref": "ApiGatewayRestApi"
-            },
-            "Type": "COGNITO_USER_POOLS",
-            "ProviderARNs": [
-              {
-                "Fn::GetAtt": [
-                  "tortureCognitoUserPool",
-                  "Arn"
-                ]
-              }
-            ],
-            "IdentitySource": "method.request.header.Authorization"
-          }
         }
       },
-      "Outputs": {
-        "UserPoolId": {
-          "Description": "Cognito User Pool ID",
-          "Value": {
-            "Ref": "tortureCognitoUserPool"
-          }
-        },
-        "CognitoUserPoolClientId": {
-          "Description": "Cognito User Pool Client ID",
-          "Value": {
-            "Ref": "tortureCognitoUserPoolClient"
-          }
-        }
-      }
+      "Outputs": {}
     },
     "configValidationMode": "warn",
     "serviceFilename": "serverless.yml",
@@ -1852,10 +1525,10 @@
     },
     "layers": {},
     "isDashboardMonitoringPreconfigured": false,
-    "artifact": "/home/ich/GIT/JPP/jpp-prototype/backend/.serverless/torture.zip"
+    "artifact": "/home/ich/GIT/JPP/handover-acct/torture-tracker/backend/.serverless/torture.zip"
   },
   "package": {
-    "artifactDirectoryName": "serverless/torture/dev/1638876850869-2021-12-07T11:34:10.869Z",
+    "artifactDirectoryName": "serverless/torture/production/1639492230784-2021-12-14T14:30:30.784Z",
     "artifact": "torture.zip"
   }
 }

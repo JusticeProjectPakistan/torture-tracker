@@ -2,6 +2,7 @@ import { frames, allFeatures } from './tortureVisData.js';
 import { pieSelect } from './pie.js'
 import { Map } from './map.js'
 import { aggregates } from './aggregates.js'
+import { rootUrl } from "./common.js"
 
 class tortureVis {
   constructor(props) {
@@ -19,8 +20,9 @@ class tortureVis {
     }
   }
 
+  // Currently deprocated in favor of aggregates.js until we start doing analytics
   awsGet() {
-    let url = "https://4z4ntfa3oi.execute-api.us-east-1.amazonaws.com/dev/v1/byRegion";
+    let url = rootUrl + "/byRegion";
     let awsCfg = {
       method: 'POST'
     };

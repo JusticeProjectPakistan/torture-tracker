@@ -1,0 +1,1 @@
+export let rootUrl = "https://12cao4lu68.execute-api.us-east-1.amazonaws.com/production/v1"

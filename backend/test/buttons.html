@@ -64,7 +64,7 @@
 
             document.querySelectorAll('.rest-call').forEach(d => d.addEventListener("click", d => {
                 let call = d.target.id.split('-')[1];
-                let restURL = `https://nrm5qc4mv3.execute-api.us-east-1.amazonaws.com/dev/v1/incident`
+                let restURL = `https://xxx.execute-api.us-east-1.amazonaws.com/dev/v1/incident`
                 if (["get", "update", "delete"].includes(call))
                     restURL += "/uid";
 
@@ -157,7 +157,7 @@
             oReq.addEventListener("error", transferFailed);
             oReq.addEventListener("abort", transferCanceled);
 
-            oReq.open("POST", "https://nrm5qc4mv3.execute-api.us-east-1.amazonaws.com/dev/hello");
+            oReq.open("POST", "https://xxx.execute-api.us-east-1.amazonaws.com/dev/hello");
 
             // if using Cognito Hosted UI w id_token
             let urlSearchParams = new URLSearchParams(window.location.hash);

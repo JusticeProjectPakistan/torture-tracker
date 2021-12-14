@@ -1,13 +1,13 @@
 'use strict';
-const AWS = require('aws-sdk')
-const Schema = require('js/schema.js')
-const Filter = require('js/filter.js')
+const AWS = require('aws-sdk');
+const Schema = require('js/schema.js');
+// const Filter = require('js/filter.js');
 
 let schema = new Schema();
-let filter = new Filter();
+// let filter = new Filter();
 
 function corsHeaders(event) {
-  let allowedHosts = ["http://localhost:3000", "http://localhost:5500", "https://mwolfeu.github.io"];
+  let allowedHosts = ["http://localhost:3000", "https://justiceprojectpakistan.github.io"]; // add cors allowed hosts here
   let eho = event.headers.origin;
   if (allowedHosts.includes(eho))
     return {
@@ -30,13 +30,13 @@ module.exports = {
     };
   },
 
-  byRegion: async(event) => {
-    return {
-      statusCode: 200,
-      headers: corsHeaders(event),
-      body: JSON.stringify(filter.regionAggregates())
-    };
-  },
+  // byRegion: async(event) => {
+  //   return {
+  //     statusCode: 200,
+  //     headers: corsHeaders(event),
+  //     body: JSON.stringify(filter.regionAggregates())
+  //   };
+  // },
 
   create: async(event, context) => {
 
