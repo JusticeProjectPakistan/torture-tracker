@@ -1,5 +1,3 @@
-
-
 # Torture Tracker Project Documentation
 
 13.12.2021
@@ -77,11 +75,11 @@ Using the administration interface a JPP manager:
 * Modifies/augments the data
 * Marks the data “_reviewed_” once satisfied
 
-Once this process is finished, the manager may want to update the website aggregates with the newly reviewed data.  From the administration page, click on “View Aggregates”.  This will bring up the narrative visualization component.  Unlike in the narrative, visuals here can be modified and downloaded easily via the controls in the upper right of each visualization. Additionally, the visualization data is _volatile, _meaning it is not saved anywhere yet.  As such the page should not be reloaded, but relaunched by clicking on the administration page button if needed.  Once satisfied, the manager can click on the gear, and (with a github token) upload the new data to the code repository for the public.  
+Once this process is finished, the manager may want to update the website aggregates with the newly reviewed data.  From the administration page, click on “View Aggregates”.  This will bring up the narrative visualization component.  Unlike in the narrative, visuals here can be modified and downloaded easily via the controls in the upper right of each visualization. Additionally, the visualization data is _volatile_, meaning it is not saved anywhere yet.  As such the page should not be reloaded, but relaunched by clicking on the administration page button if needed.  Once satisfied, the manager can click on the gear, and (with a github token) upload the new data to the code repository for the public.  
 
 **Note**: Only rows marked as “reviewed” will be used in creation of the aggregates.
 
-**Note**: All GitHub functionality is restricted and requires a secret token to function.  These can be entered by clicking the cog icon on this page and generated via the users setup on the Github website.
+**Note**: All GitHub functionality is restricted and requires a secret token to function.  These can be entered by clicking the cog icon on this page and generated via the users setup on the Github website. [https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token) 
 
 **Note**: Tokens are privileged keys and have full control over your repository.  The keys should be rotated often, time limited, and never shared with untrusted individuals or individuals outside JPP.
 
@@ -113,7 +111,7 @@ Amazon Web Services comprises two types of accounts.  There is a single “root�
 
 All services on AWS have been instantiated using “Serverless” which is a tool allowing AWS Cloud Formation deployments using the YAML file contained in the GitHub repository.
 
-**Note**: It is _required _that your administrator familiarize themselves with the various AWS control panels, including but not limited to, billing, billable functions used for each service<sup>1</sup>,  database backup, and user creation.
+**Note**: It is _required_ that your administrator familiarize themselves with the various AWS control panels, including but not limited to, billing, billable functions used for each service<sup>1</sup>,  database backup, and user creation.
 
 <sup>1 </sup>Ex: DynamoDB On-demand vs. Provisioned capacity [https://aws.amazon.com/dynamodb/pricing/](https://aws.amazon.com/dynamodb/pricing/) 
 
