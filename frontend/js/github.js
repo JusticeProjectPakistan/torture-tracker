@@ -6,8 +6,8 @@ import {
 async function updateGithub(cfg, data) {
   let octokit = new Octokit();
 
-  // let owner = 'mwolfeu';
-  // let repo = 'jpp-prototype';
+  // let owner = 'justiceprojectpakistan';
+  // let repo = 'torture-tracker';
   // let path = "frontend/js/aggregates.js"
   let { githubToken, owner, repo, path } = cfg;
 

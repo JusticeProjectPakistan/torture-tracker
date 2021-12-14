@@ -80,8 +80,8 @@ function setAdminMode() { // hide all sections except tortureVis
     }
     let cfg = {
       githubToken,
-      owner: 'mwolfeu',
-      repo: 'jpp-prototype',
+      owner: 'justiceprojectpakistan',
+      repo: 'torture-tracker',
       path: "frontend/js/aggregates.js"
     }
     updateGithub(cfg, window.visData);
