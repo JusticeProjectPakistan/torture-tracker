@@ -7,7 +7,7 @@ let schema = new Schema();
 // let filter = new Filter();
 
 function corsHeaders(event) {
-  let allowedHosts = ["http://localhost:3000", "https://justiceprojectpakistan.github.io"]; // add cors allowed hosts here
+  let allowedHosts = ["http://localhost:3000", "https://torturetracker.jpp.org.pk"]; // add cors allowed hosts here
   let eho = event.headers.origin;
   if (allowedHosts.includes(eho))
     return {
@@ -123,6 +123,9 @@ module.exports = {
       }
     }
 
+    // lastEvaluatedKey / ExclusiveStartKey / Limit 
+    // https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html
+    // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.Pagination.html
     if (scanResult.Items == null ||
       !Array.isArray(scanResult.Items) ||
       scanResult.Items.length == 0) {

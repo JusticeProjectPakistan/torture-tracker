@@ -64,7 +64,7 @@
         import layout from "../js/entry.js"; window.qNames = Object.keys(layout).flatMap(d => layout[d]).map(d => d.Type!='array'?d.Name:undefined).filter(d => d);
     </script> -->
     <script>
-        let lang = navigator.language.endsWith('-UR') ? 'ur' : 'en';
+        let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
 
         function awsSubmit(obj) {
             let data = obj.getAllValues();
@@ -82,6 +82,7 @@
             const aws = new aws4fetch.AwsClient({
                 accessKeyId: 'none',
                 secretAccessKey: 'none',
+                retries: 3
             });
             console.log('Submitting survey', data)
 
@@ -112,7 +113,8 @@
             let n = e.attr('name') || $(el.htmlElement).parent().parent().attr('name');
 
             let href = `./info.html#${n}`;
-            let style = 'text-decoration: none;float: right; color:#222;'
+            let dir = lang == 'ur' ? 'left' : 'right';
+            let style = `text-decoration: none;float: ${dir}; color:#222;`
             e.find('.sv-title').prepend(`<a class="far fa-question-circle" href="${href}" target="_blank" rel="noopener noreferrer" style="${style}"></a>`);
 
             // move dropdown arrows left

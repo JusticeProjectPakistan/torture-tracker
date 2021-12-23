@@ -54,7 +54,7 @@ module.exports = class Schema {
         if (d.maxLen) o.maxItems = d.maxLen;
         if (d.Type == "array") {
           o.items = { type: "object", properties: {}, required: [] };
-          this.coder(encode, this.schemaCfg[d["Values-" + lang]], lang, o.items);
+          this.coder(encode, this.schemaCfg[d["Values-en"]], lang, o.items);
         }
       }
 
@@ -82,7 +82,7 @@ module.exports = class Schema {
       // encode it as zero since you might want to add more options later
       let options;
       if (typeof d["Values-en"] == 'string') {
-        options = d["Values-" + lang].split(',').map(d => d.trim());
+        options = (d["Values-" + lang] || '').split(',').map(d => d.trim());
         if (d["Values-en"].replace(/ /g, '').endsWith(',other')) { // put "other" at start
           let other = options.pop(); // in whatever language
           options = [other, ...options];
