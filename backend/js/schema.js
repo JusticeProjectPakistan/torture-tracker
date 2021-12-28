@@ -30,7 +30,7 @@ module.exports = class Schema {
 
     cfg.forEach(d => {
 
-      if (d.Type == "string" || d.Type == "code") {
+      if (d.Type == "string" || d.Type == "email" || d.Type == "code") {
         let o = { type: "string" };
         parentObj.properties[d.Name] = o;
         if (d.minLen) o.minLength = d.minLen;

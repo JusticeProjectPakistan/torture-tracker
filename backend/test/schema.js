@@ -16,6 +16,7 @@ data = [
     "phone": "asdf",
     "born": "1970-01-01",
     "gender": "male",
+    email: 'asdf@sdaf.com',
     "complaint_date": "1970-01-01",
     "incidents": [{
       "date": "1970-01-01",

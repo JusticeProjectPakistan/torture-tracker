@@ -54,18 +54,25 @@ module.exports = {
     } catch (jsonError) {
       console.log('There was an error parsing the body', jsonError)
       return {
-        statusCode: 460
+        statusCode: 460,
+        headers: corsHeaders(event)
       }
     }
 
     if (!bodyObj.lang) {
       console.log('Language not set');
-      return { statusCode: 461 }
+      return {
+        statusCode: 461,
+        headers: corsHeaders(event)
+      }
     }
 
     if (!(['en', 'ur'].includes(bodyObj.lang))) {
       console.log('Language incorrect: ', bodyObj.lang);
-      return { statusCode: 462 }
+      return {
+        statusCode: 462,
+        headers: corsHeaders(event)
+      }
     }
     let lang = bodyObj.lang;
 
@@ -82,6 +89,7 @@ module.exports = {
       console.log(JSON.stringify(rv));
       return {
         statusCode: 400, // failed schema validation
+        headers: corsHeaders(event)
       }
     }
 
@@ -94,7 +102,7 @@ module.exports = {
       console.log('putParams', putParams)
       return {
         statusCode: 500,
-        // body: JSON.stringify([event, context, putParams, error])
+        headers: corsHeaders(event)
       }
     }
 
@@ -107,30 +115,43 @@ module.exports = {
 
   list: async(event, context) => {
     let scanParams = {
-      TableName: process.env.DYNAMODB_INCIDENT_TABLE
+      TableName: process.env.DYNAMODB_INCIDENT_TABLE,
+      // Limit: 2 // test LastEvaluatedKey
     }
+
+    // lastEvaluatedKey / ExclusiveStartKey / Limit 
+    // https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html
+    // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.Pagination.html
     let scanResult = {}
+    let items = [];
     try {
-      let dynamodb = new AWS.DynamoDB.DocumentClient()
-      scanResult = await dynamodb.scan(scanParams).promise()
+
+      do { // depaginate / 1mb limit
+        let dynamodb = new AWS.DynamoDB.DocumentClient();
+        scanResult = await dynamodb.scan(scanParams).promise();
+        if (Array.isArray(scanResult.Items))
+          items = items.concat(scanResult.Items);
+        scanParams.ExclusiveStartKey = scanResult.LastEvaluatedKey;
+      } while (scanResult.LastEvaluatedKey);
+      scanResult.Items = items;
+
       if (scanResult.Items)
         scanResult.Items.forEach(d => schema.decode(d, 'en'));
     } catch (scanError) {
       console.log('Error: lambda scan')
       console.log('scanError', scanError)
       return {
-        statusCode: 500
+        statusCode: 500,
+        headers: corsHeaders(event)
       }
     }
 
-    // lastEvaluatedKey / ExclusiveStartKey / Limit 
-    // https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Query.html
-    // https://docs.aws.amazon.com/amazondynamodb/latest/developerguide/Query.Pagination.html
     if (scanResult.Items == null ||
       !Array.isArray(scanResult.Items) ||
       scanResult.Items.length == 0) {
       return {
-        statusCode: 404
+        statusCode: 404,
+        headers: corsHeaders(event)
       }
     }
     return {
@@ -238,7 +259,10 @@ module.exports = {
     } catch (deleteError) {
       console.log('Error: lambda delete')
       console.log('deleteError', deleteError)
-      return { statusCode: 500 }
+      return {
+        statusCode: 500,
+        headers: corsHeaders(event)
+      }
     }
 
     return {
