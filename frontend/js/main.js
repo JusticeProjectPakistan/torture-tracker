@@ -106,7 +106,7 @@ function setAdminMode() { // hide all sections except tortureVis
 }
 
 globalThis.lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
-globalThis.lang = 'ur'
+// globalThis.lang = 'ur'
 initTortureVis();
 initFullpage();
 
