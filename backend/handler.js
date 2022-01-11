@@ -136,7 +136,12 @@ module.exports = {
       scanResult.Items = items;
 
       if (scanResult.Items)
-        scanResult.Items.forEach(d => schema.decode(d, 'en'));
+        scanResult.en = scanResult.Items;
+      scanResult.ur = JSON.parse(JSON.stringify(scanResult.en)); // copy
+      delete scanResult.Items;
+      // Decode all
+      scanResult.en.forEach(d => schema.decode(d, 'en'));
+      scanResult.ur.forEach(d => schema.decode(d, 'ur'));
     } catch (scanError) {
       console.log('Error: lambda scan')
       console.log('scanError', scanError)
@@ -146,9 +151,9 @@ module.exports = {
       }
     }
 
-    if (scanResult.Items == null ||
-      !Array.isArray(scanResult.Items) ||
-      scanResult.Items.length == 0) {
+    if (scanResult.en == null ||
+      !Array.isArray(scanResult.en) ||
+      scanResult.en.length == 0) {
       return {
         statusCode: 404,
         headers: corsHeaders(event)

@@ -1,19 +1,20 @@
-import { frames, allFeatures } from './tortureVisData.js';
+import { getFrames, allFeatures } from './tortureVisData.js';
 import { pieSelect } from './pie.js'
 import { Map } from './map.js'
 import { aggregates } from './aggregates.js'
 import { rootUrl } from "./common.js"
+import { visText } from "./content.js"
 
 class tortureVis {
   constructor(props) {
 
     var d1 = document.querySelector(props.container);
-    d1.insertAdjacentHTML('beforeend', frames);
+    d1.insertAdjacentHTML('beforeend', getFrames());
 
     if ("visData" in window) { // if predefined
       this.cbPie(window.visData);
     } else { // get it from AWS
-      this.cbPie(aggregates); // moved to github from AWS
+      this.cbPie(JSON.parse(unescape(aggregates))[globalThis.lang]); // moved to github from AWS
       // this.awsGet();
 
       this.hasMouse = matchMedia('(pointer:fine)').matches;
@@ -96,7 +97,12 @@ class tortureVis {
       let title = selRegions.length ? selRegions[0] : "Pakistan";
       let total = selRegions.length ? e.detail.filter.region[title] : e.detail.filter.total.value;
 
-      document.querySelector('#tortureVis #map #title').innerHTML = `Torture in <span id="location">${title}</span>`;
+      // if (globalThis.lang == 'ur')
+      //   document.querySelector('#tortureVis #map #title').innerHTML = `<span id="location">${title}</span> ${visText.torturein.ur}`;
+      // else
+      //   document.querySelector('#tortureVis #map #title').innerHTML = `${visText.torturein.en} <span id="location">${title}</span>`;
+      document.querySelector('#tortureVis #map #title').innerHTML = `${visText.torturein[globalThis.lang]} <span id="location" style="font-family:Roboto;">${title}</span>`;
+
       document.querySelector('#tortureVis #map #value').innerHTML = total;
 
       map.react();
@@ -107,9 +113,10 @@ class tortureVis {
       selector: { root: '#tortureVis #meta' },
       startCategory: "region",
       eventFilter: d => d.pakistan,
-      language: "en",
+      language: window.lang,
       infoText: {
-        en: "Select the option to view.Deleselect all for an aggregate."
+        en: "Select the option to view. Deleselect all for an aggregate.",
+        ur: "دیکھنے کے لیے آپشن کو منتخب کریں۔ مجموعی کے لیے سبھی کو غیر منتخب کریں۔"
       },
       categories: {
         region: {
@@ -117,7 +124,8 @@ class tortureVis {
           values: undefined,
           excludeFromOptionCount: true,
           infoText: {
-            en: "Select the province to view. Deselect all to view the country."
+            en: "Select the province to view. Deselect all to view the country.",
+            ur: "دیکھنے کے لیے صوبہ منتخب کریں۔ ملک دیکھنے کے لیے سبھی کو غیر منتخب کریں۔"
           }
         },
         // gender: {
@@ -130,7 +138,7 @@ class tortureVis {
     };
 
     Object.keys(data.pakistan.total.category).forEach(d => {
-      if (data.pakistan.total.category[d] > 1)
+      if (data.pakistan.total.category[d] > 1 && (!cfg.categories[d]))
         cfg.categories[d] = {};
     });
 

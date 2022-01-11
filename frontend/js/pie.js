@@ -1,4 +1,5 @@
 import { mergeDeep, pGet, pSet } from "./util.js"
+import { visText, selectCategories } from "./content.js"
 
 // TODO
 // andOr
@@ -6,6 +7,10 @@ import { mergeDeep, pGet, pSet } from "./util.js"
 
 class pieSelect {
   constructor(cfg) {
+    let hovertemplate = `<b>%{label}</b><br><span style='font-size:1.1em;'>${visText.total.en}: <b style='color:#ebdf9a'> %{value} </b></span> <extra></extra>`
+    if (globalThis.lang == 'ur')
+      hovertemplate = `<b>%{label}</b><br><span style='font-size:1.1em;'><b style='color:#ebdf9a'> %{value} </b> :${visText.total.ur}</span> <extra></extra>`
+
     let layout = {
       showlegend: true,
       // legend: { y: 1.5 },
@@ -13,7 +18,10 @@ class pieSelect {
       // width: props.width,
       margin: { t: 30, r: 5, b: 30, l: 50 },
       // transition: { easing: "cubic-in-out" }
-      legend: { font: { family: "PT Sans Narrow" } },
+      legend: {
+        font: { family: "PT Sans Narrow" },
+        // x: globalThis.lang == 'ur' ? 0 : 1
+      },
       font: { family: "PT Sans Narrow" },
     };
 
@@ -26,9 +34,9 @@ class pieSelect {
       // textinfo: "label+percent",
       // textposition: "inside",
       // insidetextorientation: "radial",
-      hovertemplate: "<b>%{label}</b><br><span style='font-size:1.1em;'>Total: <b style='color:#ebdf9a'> %{value} </b></span> <extra></extra>",
+      hovertemplate: hovertemplate,
       hoverlabel: {
-        align: 'left',
+        align: globalThis.lang == 'ur' ? 'right' : 'left',
         bgcolor: '#444',
         // font: { size: 16 },
       },
@@ -70,7 +78,7 @@ class pieSelect {
       let o = document.createElement("option");
       o.setAttribute('value', d);
       selectEl.append(o);
-      o.text = d.replaceAll('_', ' ');
+      o.text = selectCategories[d][globalThis.lang]; // d.replaceAll('_', ' ');
     });
     // select event
     selectEl.addEventListener('change',

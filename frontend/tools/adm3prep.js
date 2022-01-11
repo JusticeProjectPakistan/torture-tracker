@@ -82,9 +82,7 @@ let altProvinces = {
 };
 
 // REVERSED
-let altDistricts = { "Attok": "Attock", "Bajaur": "Bajur", "Battagram": "Batagram", "Bhakkar": "Bhakhar", "Buner": "Bunair", "Charsadda": "Charsada", "Dera Ghazi Kha": "D. G. Khan", "Dera Ismail Khan": "D. I. Khan", "Gujranwala 1": "Gujranwala", "Jakobabad": "Jacobabad", "Jafarabad": "Jaffarabad", "Jhelum": "Jehlum", "Malir": "Karachi Malir", "Karachi west": "Karachi West", "Kech": "Kech/Turbat", "Kholu": "Kohlu", "Dir": "Upper Dir", "Malakand P.A.": "Malakand", "Musakhel": "Musa Khel", "Muzaffargarh": "Muzaffar Garh", "Narowal 1": "Narowal 226", "Nasirabad": "Nasirabad/Tamboo", "N. Waziristan": "North Waziristan", "Naushahro Firoz": "Nowshero Feroze", "": "Nushki", "Panjgur": "Panjgoor", "Rahimyar Khan": "Rahim Yar Khan", "Rajan Pur": "Rajanpur", "Nawab Shah": "Shaheed Banazir Abad", "Sibi": "Sibbi", "S. Waziristan": "South Waziristan", "Toba Tek Singh": "T.T. Singh", "Tando Allahyar": "Tando Allah Yar", "Tando M. Khan": "Tando Muhammad Khan", "Umerkot": "Umer Kot" };
-
-
+let altDistricts = { "Attok": "Attock", "Bajaur": "Bajur", "Battagram": "Batagram", "Bhakkar": "Bhakhar", "Buner": "Bunair", "Charsadda": "Charsada", "Dera Ghazi Kha": "D. G. Khan", "Dera Ismail Khan": "D. I. Khan", "Gujranwala 1": "Gujranwala", "Jakobabad": "Jacobabad", "Jafarabad": "Jaffarabad", "Jhelum": "Jehlum", "Malir": "Karachi Malir", "Karachi west": "Karachi West", "Kech": "Kech/Turbat", "Kholu": "Kohlu", "Dir": "Upper Dir", "Malakand P.A.": "Malakand", "Musakhel": "Musa Khel", "Muzaffargarh": "Muzaffar Garh", "Narowal 1": "Narowal", "Nasirabad": "Nasirabad/Tamboo", "N. Waziristan": "North Waziristan", "Naushahro Firoz": "Nowshero Feroze", "": "Nushki", "Panjgur": "Panjgoor", "Rahimyar Khan": "Rahim Yar Khan", "Rajan Pur": "Rajanpur", "Nawab Shah": "Shaheed Banazir Abad", "Sibi": "Sibbi", "S. Waziristan": "South Waziristan", "Toba Tek Singh": "T.T. Singh", "Tando Allahyar": "Tando Allah Yar", "Tando M. Khan": "Tando Muhammad Khan", "Umerkot": "Umer Kot" };
 
 fs.readFile('../data/PAK_adm3.json', 'utf8', function(err, data) {
   if (err) {
@@ -95,6 +93,8 @@ fs.readFile('../data/PAK_adm3.json', 'utf8', function(err, data) {
   map.features.forEach(d => {
     let pr = altProvinces[d.properties.NAME_1] || d.properties.NAME_1;
     let di = altDistricts[d.properties.NAME_3] || d.properties.NAME_3;
+    if (di == 'Islamabad')
+      pr = "Capital Territory"
     delete d.properties; // save space
     d.id = pr + '~' + di // modified name
     allIDs.push(d.id);

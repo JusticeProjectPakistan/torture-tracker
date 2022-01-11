@@ -19,7 +19,7 @@ let layout = { // one row in the backend db
       "Description-en": "Submission Status",
       "Values-en": "unreviewed, reviewed",
       "Description-ur": "جمع کرانے کی حیثیت",
-      "Values-ur": "جائزہ لیا, جائزہ نہیں لیا"
+      "Values-ur": "unreviewed, reviewed"
     },
     {
       "Name": "first_name",
@@ -34,7 +34,6 @@ let layout = { // one row in the backend db
     },
     {
       "Name": "last_name",
-      "Required": true,
       "Intake": true,
       "Input": "string",
       "Type": "string",
@@ -70,6 +69,14 @@ let layout = { // one row in the backend db
       "Description-en": "Birth Date",
       "Values-en": "DD-MM-YYYY",
       "Description-ur": "تاریخ پیدائش"
+    },
+    {
+      "Name": "age",
+      "Intake": true,
+      "Input": "string",
+      "Type": "number",
+      "Description-en": "Age",
+      "Description-ur": "عمر"
     },
     {
       "Name": "gender",
@@ -471,6 +478,12 @@ let layout = { // one row in the backend db
     }
   ],
   "Regions": [{
+      "S": 12,
+      "Province": "Capital Territory",
+      "District": "Islamabad",
+      "DN": 212
+    },
+    {
       "S": 0,
       "Province": "Northern Areas",
       "District": "Chilas",
@@ -813,12 +826,6 @@ let layout = { // one row in the backend db
       "DN": 211
     },
     {
-      "S": 12,
-      "Province": "Punjab",
-      "District": "Islamabad",
-      "DN": 212
-    },
-    {
       "S": 13,
       "Province": "Punjab",
       "District": "Jehlum",
@@ -899,7 +906,7 @@ let layout = { // one row in the backend db
     {
       "S": 26,
       "Province": "Punjab",
-      "District": "Narowal 226"
+      "District": "Narowal"
     },
     {
       "S": 27,

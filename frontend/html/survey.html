@@ -114,8 +114,9 @@
 
             let href = `./info.html#${n}`;
             let dir = lang == 'ur' ? 'left' : 'right';
-            let style = `text-decoration: none;float: ${dir}; color:#222;`
-            e.find('.sv-title').prepend(`<a class="far fa-question-circle" href="${href}" target="_blank" rel="noopener noreferrer" style="${style}"></a>`);
+            let style = `text-decoration: none;float: ${dir}; color:#222;`;
+            // Functionality pushed as needed text was never available
+            // e.find('.sv-title').prepend(`<a class="far fa-question-circle" href="${href}" target="_blank" rel="noopener noreferrer" style="${style}"></a>`);
 
             // move dropdown arrows left
             // $(".sv-dropdown").css('background-position', 'left .1em top 50%, 0 0')

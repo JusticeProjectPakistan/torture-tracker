@@ -205,16 +205,18 @@ window.buttons = function() {
       text: 'View changes',
       icon: 'fas fa-eye',
       event: function() {
-        let agg = aggregate();
-        if (!agg) {
+        let agg = { en: aggregate('en'), ur: aggregate('ur') }
+        if (!agg.en || !agg.ur) {
           alert('No reviewed rows loaded. Please refresh.');
           return;
         }
         let data = JSON.stringify({}); // GITHUB BUG: URL TOO LONG.  SEND IT THROUGH "window".
         let viewURL = `${window.location.protocol}//${window.location.host}/torture-tracker/frontend/?vis-data=${data}`;
-        console.log("Viewing:", agg); // TEST before aws update 
+        console.log("Viewing:", agg[lang]); // TEST before aws update 
         let viewWindow = window.open(encodeURI(viewURL), '_blank');
-        viewWindow.window.visData = agg; // send data this way instead of url
+        viewWindow.window.visData = agg[lang]; // send data this way instead of url
+        viewWindow.window.visDataEn = agg.en;
+        viewWindow.window.visDataUr = agg.ur;
       },
       attributes: {
         title: 'View and update aggregates'
@@ -248,7 +250,8 @@ $(function() {
     },
     // data: incidents
     responseHandler: function(res) {
-      return res.Items
+      globalThis.resultData = res;
+      return res[lang]
     }
   })
 })
@@ -272,7 +275,7 @@ window.ajaxRequest = function(params) {
   let cfg = {
     url,
     quietUI: firstLoad, // no errors on start
-    rvFcn: d => params.success(d || { Items: [] }), // LastEvaluatedKey
+    rvFcn: d => params.success(d || { en: [], ur: [] }), // LastEvaluatedKey
   };
   firstLoad = false;
   uiFetch(cfg);
@@ -299,9 +302,9 @@ function bump(obj, path) {
   obj[bn] = bn in obj ? obj[bn] + 1 : 1;
 }
 
-function aggregate() {
+function aggregate(lang) {
   let sparseAggregate = {};
-  let data = $table.bootstrapTable('getData');
+  let data = globalThis.resultData[lang]; //$table.bootstrapTable('getData');
   data = data.filter(d => (d.region || '').length && d.status == "reviewed");
   if (!data.length)
     return false;

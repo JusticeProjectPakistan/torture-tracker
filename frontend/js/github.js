@@ -38,7 +38,7 @@ async function updateGithub(cfg, data) {
       path,
       sha,
       message: 'Updating aggregates: ' + new Date(),
-      content: btoa('export let aggregates = ' + JSON.stringify(data))
+      content: btoa('export let aggregates = "' + escape(JSON.stringify(data)) + '"')
     })
     $('#setup-modal .modal-footer').text('Update successful');
   } catch (error) {

@@ -1,5 +1,6 @@
 import tortureVis from "./visualization.js"
 import updateGithub from "./github.js"
+import { getContent } from "./content.js"
 
 // function addTextBuffers() {
 //   d3.selectAll('.section').each(function(d) {
@@ -16,10 +17,24 @@ import updateGithub from "./github.js"
 // }
 
 function initTortureVis(data) {
+  document.querySelector("#fullpage").innerHTML = getContent();
   window.tv = new tortureVis({
     container: "#tortureVis #main",
     data: data
   });
+
+  // inject custom data w admin mode
+  let urlSearchParams = new URLSearchParams(window.location.search);
+
+  if (urlSearchParams.has('vis-data')) {
+    try {
+      if (!window.visData) // if not set via "window", look for data in URL
+        window.visData = JSON.parse(urlSearchParams.get('vis-data'));
+      setAdminMode();
+    } catch (error) {
+      console.error('Bad JSON data in URL.', error);
+    }
+  }
 }
 
 function initFullpage() {
@@ -84,33 +99,26 @@ function setAdminMode() { // hide all sections except tortureVis
       repo: 'torture-tracker',
       path: "frontend/js/aggregates.js"
     }
-    updateGithub(cfg, window.visData);
+    updateGithub(cfg, { en: window.visDataEn, ur: window.visDataUr });
   }
 
   $('#login-button #update').click(update);
 }
 
-let urlSearchParams = new URLSearchParams(window.location.search);
-
-if (urlSearchParams.has('vis-data')) {
-  try {
-    if (!window.visData) // if not set via "window", look for data in URL
-      window.visData = JSON.parse(urlSearchParams.get('vis-data'));
-    setAdminMode();
-  } catch (error) {
-    console.error('Bad JSON data in URL.', error);
-  }
-}
-
-// init timeline
-let tlURL = `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=1RTAaPXhXk20dgXLVdxJdK_aSICMAi_LPeCytplb04Is&font=Default&lang=en&initial_zoom=2&height=650`;
-let timeline = document.querySelector('iframe')
-if (timeline) timeline.setAttribute('src', tlURL);
-
+globalThis.lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
+globalThis.lang = 'ur'
 initTortureVis();
-// d3.selectAll(".section")
-//   .classed("fp-auto-height-responsive", true);
-document.querySelectorAll('.section').forEach(d =>
-  d.classList.add("fp-auto-height-responsive"))
-
 initFullpage();
+
+// set text lang
+document.querySelectorAll(`
+.chapeau,
+.narration-question p,
+#tortureVis #info,
+#map #title,
+#map #total,
+#meta #select
+`).forEach(d => {
+  d.setAttribute('lang', globalThis.lang);
+  d.setAttribute('language', globalThis.lang);
+});

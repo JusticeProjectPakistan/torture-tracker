@@ -74,7 +74,7 @@ module.exports = class Schema {
       }
 
       // required
-      if (d.Required) {
+      if (d.Required && d.Name != 'phone') {
         parentObj.required.push(d.Name);
       }
 

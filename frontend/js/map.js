@@ -1,34 +1,35 @@
 import { mergeDeep, pGet, pSet } from "./util.js"
+import { visText } from "./content.js"
 
 class Map {
   constructor(cfg) {
+    let hovertemplate = `<b>%{location}</b><br><span style='font-size:1.1em;'>${visText.total.en}: <b style='color:#ebdf9a'> %{z} </b></span> <extra></extra>`
+    if (globalThis.lang == 'ur') // bug won't align right
+      hovertemplate = `<b>%{location}</b><br><span style='width:100%; text-align:right; font-size:1.1em;'><b style='color:#ebdf9a'> %{z} </b> :${visText.total.ur}</span> <extra></extra>`
+
     let data = [{
       "type": "choropleth",
-      // "name": "PAK",
-      // "geojson": "/jpp-prototype/data/PAK_adm3.json",
-      // locations: ["Abbottabad", "Bhittani"],
-      // "z": [5, 10],
-      // featureidkey: "properties.NAME_3",
-      // text: "hi",
-      // hovertext: "ho",
-      // hovertemplate: "location",
-      // hoverinfo: "location",
       "colorbar": {
         xanchor: "left",
         bgcolor: "rgba(255,255,255,.8)",
         thickness: 15,
         "y": .95,
+        x: globalThis.lang == 'ur' ? 0 : 1,
         "yanchor": "top",
         "len": 0.45,
         dtick: 1,
         // nticks: 2,
         "title": {
-          "text": "Cases",
-          "side": "right"
+          "text": visText.cases[globalThis.lang],
+          "side": 'right'
         }
       },
-      hovertemplate: "<b>%{location}</b><br><span style='font-size:1.1em;'>Total: <b style='color:#ebdf9a'> %{z} </b></span> <extra></extra>",
-      hoverlabel: { namelength: 50 },
+      hovertemplate: hovertemplate,
+      hoverlabel: {
+        namelength: 50,
+        align: globalThis.lang == 'ur' ? 'right' : 'left',
+        bgcolor: '#444',
+      },
       colorscale: 'Viridis',
       "reversescale": true,
     }];

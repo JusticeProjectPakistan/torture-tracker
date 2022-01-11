@@ -32,3 +32,21 @@ console.log(data);
 
 data.forEach(d => { console.log(schema.decode(d, 'ur')) })
 console.log(data);
+
+data = [{
+  pk: 123,
+  "status": "جائزہ لیا",
+  "first_name": "TEST",
+  "born": "1970-01-01",
+  "gender": "عورت",
+  "complaint_date": "1970-01-01",
+  "incidents": [{
+    "date": "1970-01-01",
+    "perpetrators": [
+      {}
+    ]
+  }]
+}];
+
+data.forEach(d => { console.log(schema.encode(d, 'ur')) })
+console.log(data);

@@ -198,7 +198,10 @@ class SurveyUtil {
       if (type == "survey") {
         if (item) {
           item.indent = indent;
-          item.isRequired = d.Required;
+          if ((!this.isIntake) && item.name == "phone")
+            item.isRequired = false;
+          else
+            item.isRequired = d.Required;
           // item.maxWidth = "50vh";
           if (this.isIntake)
             item.visible = d.Intake || false;
