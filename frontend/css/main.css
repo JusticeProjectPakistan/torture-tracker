@@ -132,6 +132,7 @@ p {
     text-align: center;
 }
 
+#section0 .title:lang(ur),
 .chapeau:lang(ur),
 .narration-question p:lang(ur),
 #map #title:lang(ur),
