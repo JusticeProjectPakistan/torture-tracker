@@ -112,6 +112,7 @@ initFullpage();
 
 // set text lang
 document.querySelectorAll(`
+#section0 .title,
 .chapeau,
 .narration-question p,
 #tortureVis #info,
