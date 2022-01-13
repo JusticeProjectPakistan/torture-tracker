@@ -123,3 +123,9 @@ document.querySelectorAll(`
   d.setAttribute('lang', globalThis.lang);
   d.setAttribute('language', globalThis.lang);
 });
+
+// language button
+const btn = document.querySelector("#language-button");
+btn.addEventListener("click", function() {
+  alert('Request 13.12: This button will override browser language.  Unit testing scheduled for 14.12.')
+});

@@ -7,11 +7,13 @@ let tlURL = {
 // default copy for website
 let defaultCopy = [{
     en: `
+    <div id="language-button"> <input type='button' value="اردو میں دیکھیں"></div>
     <h2 class="title">Tracking Torture</h2>
     <hr class="title-bar">
     <h5 class="subtitle">Uncovering Human Rights Violations by Pakistani Authorities</h5>
     `,
     ur: `
+    <div id="language-button"> <input type='button' value="View in English"></div>
     <h2 class="title">تشدد کا سراغ لگانا</h2>
     <hr class="title-bar">
     <h5 class="subtitle">پاکستانی حکام کی جانب سے انسانی حقوق کی خلاف ورزیوں کا پردہ فاش</h5>
