@@ -184,8 +184,8 @@ let visText = {
     ur:"<div id='select' class='meta-select'>&nbsp;کی طرف سے فلٹر: </div>"
   },
   mapInfoText:{
-    en:'Select a state for more specific results.',
-    ur:'مزید مخصوص نتائج کے لیے ریاست کا انتخاب کریں۔'
+    en:'Select or hover on a district for totals.',
+    ur:'ٹوٹل کے لیے ضلع کو منتخب کریں یا ہوور کریں۔'
   },
 }
 

@@ -115,8 +115,8 @@ class tortureVis {
       eventFilter: d => d.pakistan,
       language: window.lang,
       infoText: {
-        en: "Select the option to view. Deleselect all for an aggregate.",
-        ur: "دیکھنے کے لیے آپشن کو منتخب کریں۔ مجموعی کے لیے سبھی کو غیر منتخب کریں۔"
+        en: "Select an option to view its totals by district. Deleselect for a category aggregate.",
+        ur: "ضلع کے لحاظ سے اس کے ٹوٹل دیکھنے کے لیے ایک آپشن منتخب کریں۔ زمرہ کے مجموعی کے لیے غیر منتخب کریں۔"
       },
       categories: {
         region: {

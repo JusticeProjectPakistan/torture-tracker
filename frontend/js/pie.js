@@ -16,7 +16,7 @@ class pieSelect {
       // legend: { y: 1.5 },
       // height: props.height,
       // width: props.width,
-      margin: { t: 30, r: 5, b: 30, l: 50 },
+      margin: { t: 40, r: 5, b: 30, l: 50 },
       // transition: { easing: "cubic-in-out" }
       legend: {
         font: { family: "PT Sans Narrow" },

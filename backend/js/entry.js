@@ -2,7 +2,7 @@
 let layout = { // one row in the backend db
   "Main": [{
       "Page-en": "Victim",
-      "Page-ur": "مظلوم",
+      "Page-ur": "متاثرہ فرد",
       "Name": "pk",
       "Required": true,
       "Input": "string",
@@ -105,9 +105,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "Education Level",
-      "Values-en": "none, primary, middle, matric/O-levels, intermediate/A-levels, graduation, masters, madrasa, dars-e-nizami, other",
+      "Values-en": "unknown, none, primary, middle, matric/O-levels, intermediate/A-levels, graduation, masters, madrasa, dars-e-nizami, other",
       "Description-ur": "تعلیمی قابلیت",
-      "Values-ur": "کوئی نہیں، پرائمری سکول، ثانوی اسکول، برطانوی ثانوی تعلیم سند یا میٹرک، انٹرمیڈیٹ، گریجویشن، ماسٹرز، مدرسہ، درس نظامی، کچھ اور"
+      "Values-ur": "نامعلوم، کوئی نہیں، پرائمری سکول، ثانوی اسکول، برطانوی ثانوی تعلیم سند یا میٹرک، انٹرمیڈیٹ، گریجویشن، ماسٹرز، مدرسہ، درس نظامی، کچھ اور"
     },
     {
       "Name": "education_other",
@@ -143,12 +143,12 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "Religion",
-      "Values-en": "muslim, hindu, christian, ahmadiyya, sikh, other",
+      "Values-en": "unknown, muslim, hindu, christian, ahmadiyya, sikh, other",
       "Description-ur": "مذہب",
-      "Values-ur": "مسلم، ہندو، عیسائی، احمدیہ، سکھ، اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، مسلم، ہندو، عیسائی، احمدیہ، سکھ، اس کے علاوہ کچھ اور"
     },
     {
-      "Name": "religioin_other",
+      "Name": "religion_other",
       "Intake": true,
       "Input": "string",
       "Type": "string",
@@ -162,9 +162,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "Ethnicity",
-      "Values-en": "punjabi, pashtun, sindhi, saraiki, muhajir, baloch, other",
+      "Values-en": "unknown, punjabi, pashtun, sindhi, saraiki, muhajir, baloch, other",
       "Description-ur": "نسل",
-      "Values-ur": "پنجابی، پشتون، سندھی، سرائیکی، مہاجر‎، بلوچ، اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، پنجابی، پشتون، سندھی، سرائیکی، مہاجر‎، بلوچ، اس کے علاوہ کچھ اور"
     },
     {
       "Name": "ethnicity_other",
@@ -191,9 +191,9 @@ let layout = { // one row in the backend db
       "Input": "multiple",
       "Type": "code-array",
       "Description-en": "Reason for torture",
-      "Values-en": "confession, information, recovery, other",
+      "Values-en": "unknown, confession, information, recovery, other",
       "Description-ur": "ایذارسانی کی وجہ",
-      "Values-ur": "اعتراف، معلومات، بحالی،  اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، اعتراف، معلومات، برآمدگی،  اس کے علاوہ کچھ اور"
     },
     {
       "Name": "reason_other",
@@ -211,7 +211,7 @@ let layout = { // one row in the backend db
       "Description-en": "Region",
       "Values-en": "*Regions",
       "Description-ur": "علاقے کا نام",
-      "Values-ur": "*Regions",
+      "Values-ur": "*Regions"
     },
     {
       "Name": "rep_name",
@@ -280,9 +280,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "Outcome of the complaint",
-      "Values-en": "compromise, pending, perpetrator punished, out of court settlement",
+      "Values-en": "unknown, compromise, pending, perpetrator punished, out of court settlement",
       "Description-ur": "شکایت کا کیا نتیجہ نکلا؟",
-      "Values-ur": "سمجھوتا، زیر سماعت، مجرم کو سزا، عدالت سے باہر معاهده"
+      "Values-ur": "نامعلوم، سمجھوتہ، زیر التوا،  سزا، صلح"
     },
     {
       "Page-en": "Incident",
@@ -315,9 +315,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "What was the type of the incident?",
-      "Values-en": "torture, custodial death, custodial rape, other",
+      "Values-en": "unknown, torture, custodial death, custodial rape, other",
       "Description-ur": "واقعے کی نوعیت",
-      "Values-ur": "تشدد، حراستی موت، حراستی آبرو ریزی ،اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، تشدد، حراستی موت، دوران حراست ریپ، دیگر"
     },
     {
       "Name": "incident_type_other",
@@ -335,9 +335,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "Where did the incident occur?",
-      "Values-en": "police lockup, private torture cell, detention centres, internment camp, check post, other",
+      "Values-en": "unknown, police lockup, private torture cell, detention centres, internment camp, check post, other",
       "Description-ur": "ٹارچر کس جگہ کیا گیا؟",
-      "Values-ur": "پولیس لاک اپ، نجی ٹارچر سیل، حراستی مرکز، حراستی کیمپ، چیک پوسٹ، اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، پولیس لاک اپ، نجی ٹارچر سیل، حراستی مرکز، حراستی کیمپ، چیک پوسٹ، دیگر"
     },
     {
       "Name": "place_other",
@@ -354,9 +354,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "At what stage were you tortured?",
-      "Values-en": "arrest, interrogation and investigation, search or checking, imprisonment, other",
+      "Values-en": "unknown, arrest, interrogation and investigation, search or checking, imprisonment, other",
       "Description-ur": "ٹارچر کب ہوا؟",
-      "Values-ur": "گرفتاری، پوچھ گچھ اور تفتیش، تلاشی، قید، اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، گرفتاری، پوچھ گچھ اور تفتیش، تلاشی، قید، دیگر"
     },
     {
       "Name": "during_other",
@@ -372,9 +372,9 @@ let layout = { // one row in the backend db
       "Input": "multiple",
       "Type": "code-array",
       "Description-en": "What was the type of torture?",
-      "Values-en": "physical, psychological, cultural humiliation, sexual violence, unlawful detention, other",
+      "Values-en": "unknown, physical, psychological, cultural humiliation, sexual violence, unlawful detention, other",
       "Description-ur": "ٹارچر کی نوعیت",
-      "Values-ur": "جسمانی، نفسیاتی، ثقافتی ذلت، جنسی تشدد، غیر قانونی حراست، اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، جسمانی، نفسیاتی، ثقافتی ذلت، جنسی تشدد، غیر قانونی حراست، دیگر"
     },
     {
       "Name": "torture_type_other",
@@ -390,9 +390,9 @@ let layout = { // one row in the backend db
       "Input": "multiple",
       "Type": "code-array",
       "Description-en": "What method of torture was used?",
-      "Values-en": "beating, cheera, chittar, danda, dolli, falaka, jack, manji, rolla, roller, strappado, sleep deprivation, water boarding, solitary confinement, light deprivation, sexual violence, witness to torture, other",
+      "Values-en": "unknown, beating, cheera, chittar, danda, dolli, falaka, jack, manji, rolla, roller, strappado, sleep deprivation, water boarding, solitary confinement, light deprivation, sexual violence, witness to torture, other",
       "Description-ur": "ٹارچر کا طریق کار",
-      "Values-ur": "مار، چڑا، چتر، ڈنڈا، ڈولی، تلووں پر بید سے مارنا، گدھا، مانجھی، رولہ، رولر، رسی باندھ کر لٹکانے کی سزا، نیند کی محرومی، واٹر بورڈنگ، قید تنہائی، روشنی کی محرومی، جنسی تشدد، تشدد کا گواہ، اس کے علاوہ کچھ ا"
+      "Values-ur": "نامعلوم، مار، چڑا، چتر، ڈنڈا، ڈولی، تلووں پر بید سے مارنا، فلاکہ، مانجھی، رولہ، رولر، رسی سے باندھ کر لٹکانے کی سزا، نیند کی محرومی، واٹر بورڈنگ، قید تنہائی، مسلسل اندھیرے میں رکھنا، جنسی تشدد، ٹارچر دیکھنے پر مجبور کرنا، دیگر"
     },
     {
       "Name": "torture_methods_other",
@@ -410,8 +410,8 @@ let layout = { // one row in the backend db
       "maxLen": 10,
       "Description-en": "What was the perpetrators description?",
       "Values-en": "Perpetrator",
-      "Description-ur": "مجرم کی جسمانی صورت.کیا تھی؟",
-      "Values-ur": "مجرم"
+      "Description-ur": "مجرم کی شکل و صورت اور وردی کیسی تھی؟",
+      "Values-ur": "ٹارچر کے مرتکب اہلکار سے متعلق بتائیے"
     }
   ],
   "Perpetrator": [{
@@ -439,9 +439,9 @@ let layout = { // one row in the backend db
       "Input": "single",
       "Type": "code",
       "Description-en": "Action taken against perpetrator",
-      "Values-en": "temporary suspension, permanent suspension, transfer, demotion, other",
+      "Values-en": "unknown, temporary suspension, permanent suspension, transfer, demotion, other",
       "Description-ur": "ٹارچر کرنے والے کے خلاف کیا کارروائی کی گئی؟",
-      "Values-ur": "عارضی معطلی، مستقل معطلی، منتقلی، تنزلی،  اس کے علاوہ کچھ اور"
+      "Values-ur": "نامعلوم، عارضی معطلی، مستقل معطلی، منتقلی، تنزلی،  دیگر"
     },
     {
       "Name": "action_other",
@@ -474,7 +474,7 @@ let layout = { // one row in the backend db
       "Type": "string",
       "maxLen": 20,
       "Description-en": "Perpetrator's immediate superior",
-      "Description-ur": "مجرم کا فوری اعلیٰ"
+      "Description-ur": "ٹارچر کے مرتکب اہلکار کا افسر"
     }
   ],
   "Regions": [{
