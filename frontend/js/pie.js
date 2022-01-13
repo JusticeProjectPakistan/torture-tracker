@@ -84,6 +84,8 @@ class pieSelect {
     selectEl.addEventListener('change',
       (d => {
         this.category = d.srcElement.value;
+        // HACK: forget selections for non-region categories
+        this.selectState = "region" in this.selectState ? { region: this.selectState.region } : {};
         this.react();
       }).bind(this));
 
