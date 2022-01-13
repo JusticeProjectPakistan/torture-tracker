@@ -212,7 +212,8 @@ window.buttons = function() {
         }
         let data = JSON.stringify({}); // GITHUB BUG: URL TOO LONG.  SEND IT THROUGH "window".
         // Needed for localhost /torture-tracker
-        let viewURL = `${window.location.protocol}//${window.location.host}/frontend/?vis-data=${data}`;
+        let viewURL = `${window.location.protocol}//${window.location.host}/torture-tracker/frontend/?vis-data=${data}`;
+        // let viewURL = `${window.location.protocol}//${window.location.host}/frontend/?vis-data=${data}`;
         console.log("Viewing:", agg[lang]); // TEST before aws update 
         let viewWindow = window.open(encodeURI(viewURL), '_blank');
         viewWindow.window.visData = agg[lang]; // send data this way instead of url
@@ -312,7 +313,7 @@ function aggregate(lang) {
 
   console.log('Creating Aggregates');
   let categories = Object.keys(layout).flatMap(d => makePaths(d))
-    .filter(d => ['single', 'multiple'].includes(d.Input) && d.Name != 'status')
+    .filter(d => (['single', 'multiple'].includes(d.Input) || d.Name == 'date') && d.Name != 'status')
     .map(d => d.Path);
 
   let flatObjs = { Main: data };
@@ -334,7 +335,16 @@ function aggregate(lang) {
       if (d.category in e) // which regions have which categories
         bump(sparseAggregate, `${province}.total.category.${d.category}`);
 
+
+      // prep selected data options
       let val = e[d.category];
+      if (d.category == "date") {
+        if (val == "1970-01-01")
+          val = undefined;
+        else
+          val = new Date(val).getFullYear().toString();
+        // val = ['1988', '1989', '2000'][Math.floor((Math.random() * 3))];
+      }
 
       if (!Array.isArray(val))
         val = [val].filter(d => d); // make everything an array / filter undefined

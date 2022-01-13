@@ -47,6 +47,7 @@ class pieSelect {
       textfont: { font: { family: "PT Sans Narrow" } },
       insidetextfont: { font: { family: "PT Sans Narrow" } },
       outsidetextfont: { font: { family: "PT Sans Narrow" } },
+      sort: false
     }];
 
     let config = { displayModeBar: false, responsive: true };
@@ -125,6 +126,7 @@ class pieSelect {
 
     let data = this.getLabVals(this.category);
     c.plotly.data[0].labels = Object.keys(data).sort();
+    console.log(c.plotly.data[0].labels);
     c.plotly.data[0].values = c.plotly.data[0].labels.map(d => data[d]);
     c.plotly.data[0].name = this.category;
 

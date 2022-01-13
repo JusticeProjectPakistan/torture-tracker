@@ -245,6 +245,10 @@ let selectCategories = {
   action:{
     en:'Penalty',
     ur:'جرمانہ'
+  },
+  "date":{
+    en:'Year',
+    ur: 'سال'
   }
 };
 
