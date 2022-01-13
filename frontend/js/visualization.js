@@ -115,8 +115,8 @@ class tortureVis {
       eventFilter: d => d.pakistan,
       language: window.lang,
       infoText: {
-        en: "Select an option to view its totals by district. Deleselect for a category aggregate. Results are filtered by selected region.",
-        ur: "ضلع کے لحاظ سے اس کے ٹوٹل دیکھنے کے لیے ایک آپشن منتخب کریں۔ زمرہ کے مجموعی کے لیے غیر منتخب کریں۔ نتائج کو منتخب علاقے کے لحاظ سے فلٹر کیا جاتا ہے۔"
+        en: "Select an option to view its totals by district. Deleselect for a category aggregate. Results are filtered by selected province.",
+        ur: "ضلع کے لحاظ سے اس کے ٹوٹل دیکھنے کے لیے ایک آپشن منتخب کریں۔ زمرہ کے مجموعی کے لیے غیر منتخب کریں۔ نتائج کو منتخب صوبے کے لحاظ سے فلٹر کیا جاتا ہے۔"
       },
       categories: {
         region: {

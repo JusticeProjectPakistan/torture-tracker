@@ -105,6 +105,10 @@ class pieSelect {
     let c = this.cfg;
     this.el = document.querySelector(c.selector.root + ' ' + c.selector.vis);
 
+    // reset
+    pSet(c.plotly.data[0], "pull", []);
+    pSet(c.plotly.data[0], "marker.line.width", []);
+
     let sState = pGet(this, `selectState.${this.category}`, "uVal");
     if (sState) {
       // marker effects
