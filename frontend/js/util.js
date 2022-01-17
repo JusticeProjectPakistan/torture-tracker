@@ -61,4 +61,22 @@ function pSet(obj, path, val) {
 globalThis.pGet = pGet;
 globalThis.pSet = pSet;
 
-export { mergeDeep, pSet, pGet }
+function getLang(setGlobal) {
+  let lang = navigator.language.startsWith('ur') ? 'ur' : 'en'; // from browser
+  let urlSearchParams = new URLSearchParams(window.location.search);
+  if (urlSearchParams.has('lang')) {
+    let l = urlSearchParams.get('lang')
+    if (['en', 'ur'].includes(l))
+      lang = l; // override w url param
+  }
+
+  if (setGlobal)
+    if ('lang' in globalThis) // override if globalThis.lang is already set
+      lang = globalThis.lang;
+    else
+      globalThis.lang = lang;
+
+  return lang;
+}
+
+export { mergeDeep, pSet, pGet, getLang }

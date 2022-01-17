@@ -5,7 +5,8 @@ import { rootUrl } from "./common.js"
 
 // AWS IAM XMLHTTPREQ
 let url = rootUrl + '/incident';
-let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
+// let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
+globalThis.lang = 'en';
 
 // GET SECRET KEYS
 function getKeys() {

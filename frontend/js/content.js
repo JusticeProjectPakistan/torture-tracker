@@ -1,7 +1,7 @@
 // timeline urls
 let tlURL = {
-  en: `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=1RTAaPXhXk20dgXLVdxJdK_aSICMAi_LPeCytplb04Is&font=Default&lang=en&initial_zoom=2&height=650`,
-  ur: `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=1XZbvATRzvOmybFHf7KSUKfG_mcUKB_jHrhrxkLmvtjE&font=Default&lang=ur&initial_zoom=2&height=650`
+  en: `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=1RTAaPXhXk20dgXLVdxJdK_aSICMAi_LPeCytplb04Is&font=Default&lang=en&initial_zoom=2&height=`,
+  ur: `https://cdn.knightlab.com/libs/timeline3/latest/embed/index.html?theme=${window.location.href}css/timeline.css&source=1XZbvATRzvOmybFHf7KSUKfG_mcUKB_jHrhrxkLmvtjE&font=Default&lang=ur&initial_zoom=2&height=`
 }
 
 // default copy for website
@@ -103,7 +103,7 @@ let defaultCopy = [{
       `<p>Public access to accurate and updated information regarding torture is extremely important.</p>
       <p>This database by Justice Project Pakistan is a much-needed initiative. The statistics gathered regarding torture in this database include those organisations working against the use of torture, the reported incidences, the researchers and the perpetrators and will increase public awareness about these human rights violations.</p>
       <p>To provide information about incidents of torture, please click on the link below and fill out the form.</p>
-      <p id="survey-info"><a class="link" href="html/survey.html" target="_blank" rel="noopener noreferrer">Survey Form</a>, <a class="link" href="html/faq.html" target="_blank" rel="noopener noreferrer">FAQ</a></p>`
+      <p id="survey-info"><a class="link" href="html/survey.html?lang=en" target="_blank" rel="noopener noreferrer">Survey Form</a></p>`
     ),
     ur: makeQuestion(
       "آپ کیسے ",
@@ -111,7 +111,7 @@ let defaultCopy = [{
       " رہ سکتے ہیں؟",
       `<p>ٹارچر سے متعلق درست اور معتبر معلومات عام کرنا نہایت اہم ہے۔ جسٹس پراجیکٹ پاکستان کا یہ ڈیٹا بیس اس ضمن میں ایک اہم پیش رفت ہے۔ ٹارچر سے متعلق جمع کیے گئے اعدادوشمار اس برائی کے خلاف کام کرنے والے کارکنان، وکلاء، محققین اور سرکاری اہلکاروں کے ساتھ ساتھ عام شہریوں میں شعور بیدار کرنے کا بھی باعث بنیں گے۔</p>
       <p>ٹارچر کے واقعات سے متعلق معلومات فراہم کرنے کے لیے اس لنک پر کلک کیجیے۔</p>
-      <p id="survey-info"><a class="link" href="html/survey.html" target="_blank" rel="noopener noreferrer">سروے فارم</a>, <a class="link" href="html/faq.html" target="_blank" rel="noopener noreferrer">FAQ</a></p>`
+      <p id="survey-info"><a class="link" href="html/survey.html?lang=ur" target="_blank" rel="noopener noreferrer">سروے فارم</a></p>`
     )
   },
 ];

@@ -1,6 +1,7 @@
 import tortureVis from "./visualization.js"
 import updateGithub from "./github.js"
 import { getContent } from "./content.js"
+import { getLang } from "./util.js"
 
 // function addTextBuffers() {
 //   d3.selectAll('.section').each(function(d) {
@@ -105,8 +106,7 @@ function setAdminMode() { // hide all sections except tortureVis
   $('#login-button #update').click(update);
 }
 
-globalThis.lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
-// globalThis.lang = 'ur'
+getLang(true); // get/set globalThis.lang 
 initTortureVis();
 initFullpage();
 
@@ -127,5 +127,9 @@ document.querySelectorAll(`
 // language button
 const btn = document.querySelector("#language-button");
 btn.addEventListener("click", function() {
-  alert('Request 13.12: This button will override browser language.  Unit testing scheduled for 14.12.')
+  if (globalThis.lang == 'en')
+    location.href = location.origin + location.pathname + "?lang=ur"
+  else
+    location.href = location.origin + location.pathname + "?lang=en"
+    // alert('Request 13.12: This button will override browser language.  Unit testing scheduled for 14.12.')
 });

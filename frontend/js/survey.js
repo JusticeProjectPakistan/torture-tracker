@@ -1,5 +1,6 @@
 import "../../backend/js/entry.js"
 import { surveyHelpText } from "./content.js"
+import { getLang } from "./util.js";
 
 let layout = globalThis.schema.layout;
 
@@ -384,7 +385,12 @@ class SurveyUtil {
   }
 }
 
-let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
+if (!location.href.includes('admin')) // let admin panel is in English
+  getLang(true); // set globalThis.lang
+else
+  globalThis.lang = 'en';
+
+let lang = globalThis.lang;
 
 function awsSubmit(obj) {
   let data = obj.getAllValues();
@@ -469,6 +475,6 @@ let surveyCfg = {
 };
 
 let survey = new SurveyUtil();
-survey.init(surveyCfg);
+survey.init(surveyCfg); // should do this only if not in admin panel
 
 export { SurveyUtil as default };
