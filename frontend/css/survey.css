@@ -1,6 +1,28 @@
+.sv-title,
+.sv-table__cell--header,
+.sv-completedpage,
+.selection,
+select {
+    font-family: "Noto Naskh Arabic", "Roboto" !important;
+}
+
 .sv-question {
     background: #80808014;
     border-radius: 2%;
+}
+
+#helptext-modal .modal-header button {
+    box-shadow: none !important;
+}
+
+#helptext-modal:lang(ur) {
+    font-family: "Noto Naskh Arabic", "Roboto";
+    direction: rtl;
+    text-align: justify;
+}
+
+#helptext-modal:lang(en) {
+    font-family: "Roboto";
 }
 
 

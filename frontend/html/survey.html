@@ -15,6 +15,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/js/select2.min.js"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.4/css/select2.min.css" rel="stylesheet" />
 
+    <link href="https://fonts.googleapis.com/css2?family=PT+Sans+Narrow&family=Roboto+Slab:wght@100;400&family=Roboto:wght@100;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Naskh+Arabic&display=swap" rel="stylesheet">
     <!-- <script src="https://code.jquery.com/ui/1.11.4/jquery-ui.min.js"></script>
     <link href="https://ajax.googleapis.com/ajax/libs/jqueryui/1.8.18/themes/smoothness/jquery-ui.css" type="text/css" rel="stylesheet" /> -->
 
@@ -30,6 +32,7 @@
 
     <!-- local -->
     <link rel="stylesheet" href="../css/survey.css">
+    <!-- <script type="module" src="../js/content.js"></script> -->
 
 </head>
 
@@ -55,6 +58,22 @@
         </div>
     </div>
 
+    <!-- question help text -->
+    <div id="helptext-modal" class="modal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title"></h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                </div>
+                <div class="modal-footer">
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div id="chooserContainer" style="display:inline-block;width:100%;"></div>
     <div id="surveyContainer" style="display:inline-block;width:86%;margin:0 7%;"></div>
     <!-- <div id="surveyResult"></div> -->
@@ -64,76 +83,85 @@
         import layout from "../js/entry.js"; window.qNames = Object.keys(layout).flatMap(d => layout[d]).map(d => d.Type!='array'?d.Name:undefined).filter(d => d);
     </script> -->
     <script>
-        let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
+        // let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
 
-        function awsSubmit(obj) {
-            let data = obj.getAllValues();
+        // function awsSubmit(obj) {
+        //     let data = obj.getAllValues();
 
-            let url = "https://12cao4lu68.execute-api.us-east-1.amazonaws.com/production/v1/submitSurvey";
-            let awsCfg = {
-                method: 'POST',
-                body: JSON.stringify({
-                    data,
-                    lang
-                })
+        //     let url = "https://12cao4lu68.execute-api.us-east-1.amazonaws.com/production/v1/submitSurvey";
+        //     let awsCfg = {
+        //         method: 'POST',
+        //         body: JSON.stringify({
+        //             data,
+        //             lang
+        //         })
 
-            };
+        //     };
 
-            const aws = new aws4fetch.AwsClient({
-                accessKeyId: 'none',
-                secretAccessKey: 'none',
-                retries: 3
-            });
-            console.log('Submitting survey', data)
+        //     const aws = new aws4fetch.AwsClient({
+        //         accessKeyId: 'none',
+        //         secretAccessKey: 'none',
+        //         retries: 3
+        //     });
+        //     console.log('Submitting survey', data)
 
-            function errModal(admMsg, usrMsg) {
-                var errorModal = new bootstrap.Modal(document.getElementById('error-modal')); // ERROR MODAL
-                console.error(admMsg);
-                $('#error-modal #error-status').html(usrMsg);
-                errorModal.show();
-                // cfg.rvFcn();
-            }
+        //     function errModal(admMsg, usrMsg) {
+        //         var errorModal = new bootstrap.Modal(document.getElementById('error-modal')); // ERROR MODAL
+        //         console.error(admMsg);
+        //         $('#error-modal #error-status').html(usrMsg);
+        //         errorModal.show();
+        //         // cfg.rvFcn();
+        //     }
 
-            async function call(url, opts) {
-                const response = await aws.fetch(url, opts);
+        //     async function call(url, opts) {
+        //         const response = await aws.fetch(url, opts);
 
-                if (response.status != 201) {
-                    errModal('AWS Fetch ERROR:' + response, response.status);
-                }
-                return response;
-            }
+        //         if (response.status != 201) {
+        //             errModal('AWS Fetch ERROR:' + response, response.status);
+        //         }
+        //         return response;
+        //     }
 
-            call(url, awsCfg);
-        }
+        //     call(url, awsCfg);
+        // }
 
-        function modQI(ev, el) {
+        // // opens help text modal
+        // function setHelpText(n) {
+        //     var modal = new bootstrap.Modal(document.getElementById('helptext-modal'));
+        //     $('#helptext-modal #error-status').html('HI ' + n);
+        //     modal.show();
+        // }
 
-            let e = $(el.htmlElement).parent().parent().parent();
-            // some have the name a level up
-            let n = e.attr('name') || $(el.htmlElement).parent().parent().attr('name');
+        // // see onAfterRenderQuestionInput
+        // function modQI(ev, el) {
 
-            let href = `./info.html#${n}`;
-            let dir = lang == 'ur' ? 'left' : 'right';
-            let style = `text-decoration: none;float: ${dir}; color:#222;`;
-            // Functionality pushed as needed text was never available
-            // e.find('.sv-title').prepend(`<a class="far fa-question-circle" href="${href}" target="_blank" rel="noopener noreferrer" style="${style}"></a>`);
+        //     let e = $(el.htmlElement).parent().parent().parent();
+        //     // some have the name a level up
+        //     let n = e.attr('name') || $(el.htmlElement).parent().parent().attr('name');
 
-            // move dropdown arrows left
-            // $(".sv-dropdown").css('background-position', 'left .1em top 50%, 0 0')
-            $("[type='date']").css('background-image', 'unset')
-        }
+        //     let href = `./info.html#${n}`;
+        //     let dir = lang == 'ur' ? 'left' : 'right';
+        //     let style = `text-decoration: none;float: ${dir}; color:#222;`;
+        //     // e.find('.sv-title').prepend(`<a class="far fa-question-circle" href="${href}" target="_blank" rel="noopener noreferrer" style="${style}"></a>`);
+        //     e.find('.sv-title').prepend(`<div class="far fa-question-circle" onclick="setHelpText('${n}')" style="${style}"></div>`);
 
-        let surveyCfg = {
-            title: "Torture Incident Survey.",
-            completedHtml: "<h3>Thank you for your submission.</h3> <h5>We would be happy to send you more information, hear about a case referral, or get you involved!</h5><h6 style='cursor: pointer; transform:translateY(3rem);''>You may now close this tab.</h6>",
-            onComplete: awsSubmit,
-            onAfterRenderQuestionInput: modQI,
-            lang
-        };
+        //     // move dropdown arrows left
+        //     // $(".sv-dropdown").css('background-position', 'left .1em top 50%, 0 0')
+        //     $("[type='date']").css('background-image', 'unset')
+        // }
+
+        // let surveyCfg = {
+        //     title: "Torture Incident Survey.",
+        //     completedHtml: "<h3>Thank you for your submission.</h3> <h5>We would be happy to send you more information, hear about a case referral, or get you involved!</h5><h6 style='cursor: pointer; transform:translateY(3rem);''>You may now close this tab.</h6>",
+        //     onComplete: awsSubmit,
+        //     onAfterRenderQuestionInput: modQI,
+        //     lang
+        // };
     </script>
     <script type="module">
-        import SurveyUtil from "../js/survey.js"; let survey = new SurveyUtil(); survey.init(surveyCfg);
+        // import SurveyUtil from "../js/survey.js"; let survey = new SurveyUtil(); survey.init(surveyCfg);
     </script>
+    <script type="module" src="../js/survey.js"></script>
 </body>
 
 </html>

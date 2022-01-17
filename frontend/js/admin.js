@@ -243,7 +243,7 @@ $('[data-field="incidents"]')
 $(function() {
   $table.bootstrapTable({
     // exportHiddenCells: true,
-    // exportDataType: "all",
+    exportDataType: "all",
     exportTypes: ['json', 'csv'],
     exportOptions: {
       exportHiddenCells: true,

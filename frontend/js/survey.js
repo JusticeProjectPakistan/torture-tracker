@@ -1,4 +1,6 @@
 import "../../backend/js/entry.js"
+import { surveyHelpText } from "./content.js"
+
 let layout = globalThis.schema.layout;
 
 class SurveyUtil {
@@ -381,5 +383,92 @@ class SurveyUtil {
     };
   }
 }
+
+let lang = navigator.language.startsWith('ur') ? 'ur' : 'en';
+
+function awsSubmit(obj) {
+  let data = obj.getAllValues();
+
+  let url = "https://12cao4lu68.execute-api.us-east-1.amazonaws.com/production/v1/submitSurvey";
+  let awsCfg = {
+    method: 'POST',
+    body: JSON.stringify({
+      data,
+      lang
+    })
+
+  };
+
+  const aws = new aws4fetch.AwsClient({
+    accessKeyId: 'none',
+    secretAccessKey: 'none',
+    retries: 3
+  });
+  console.log('Submitting survey', data)
+
+  function errModal(admMsg, usrMsg) {
+    var errorModal = new bootstrap.Modal(document.getElementById('error-modal')); // ERROR MODAL
+    console.error(admMsg);
+    $('#error-modal #error-status').html(usrMsg);
+    errorModal.show();
+    // cfg.rvFcn();
+  }
+
+  async function call(url, opts) {
+    const response = await aws.fetch(url, opts);
+
+    if (response.status != 201) {
+      errModal('AWS Fetch ERROR:' + response, response.status);
+    }
+    return response;
+  }
+
+  call(url, awsCfg);
+}
+
+// see onAfterRenderQuestionInput
+function modQI(ev, el) {
+
+  let e = $(el.htmlElement).parent().parent().parent();
+  // some have the name a level up
+  let n = e.attr('name') || $(el.htmlElement).parent().parent().attr('name');
+
+  let href = `./info.html#${n}`;
+  let dir = lang == 'ur' ? 'left' : 'right';
+  let style = `text-decoration: none;float: ${dir}; color:#222;`;
+
+  // set up help text when available
+  e.find('.sv-title').each(function(e) {
+    if (n in surveyHelpText) {
+      let element = $.parseHTML(`<div class="far fa-question-circle" style="${style}"></div>`)
+      $(this).prepend(element);
+      $(element).on('click', function(e) { // opens help text modal
+        var modal = new bootstrap.Modal(document.getElementById('helptext-modal'));
+        if (lang == 'ur')
+          $('#helptext-modal .modal-header button').css("margin", "-.5rem");
+        $('#helptext-modal .modal-title').html(surveyHelpText[n][lang].header);
+        $('#helptext-modal .modal-body').html(surveyHelpText[n][lang].body);
+        modal.show();
+      })
+    }
+  });
+
+  // move dropdown arrows left
+  // $(".sv-dropdown").css('background-position', 'left .1em top 50%, 0 0')
+  $("[type='date']").css('background-image', 'unset')
+}
+
+$('#helptext-modal').attr("lang", lang);
+
+let surveyCfg = {
+  title: "Torture Incident Survey.",
+  completedHtml: "<h3>Thank you for your submission.</h3> <h5>We would be happy to send you more information, hear about a case referral, or get you involved!</h5><h6 style='cursor: pointer; transform:translateY(3rem);''>You may now close this tab.</h6>",
+  onComplete: awsSubmit,
+  onAfterRenderQuestionInput: modQI,
+  lang
+};
+
+let survey = new SurveyUtil();
+survey.init(surveyCfg);
 
 export { SurveyUtil as default };
