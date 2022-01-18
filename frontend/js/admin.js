@@ -213,8 +213,8 @@ window.buttons = function() {
         }
         let data = JSON.stringify({}); // GITHUB BUG: URL TOO LONG.  SEND IT THROUGH "window".
         // Needed for localhost /torture-tracker
-        let viewURL = `${window.location.protocol}//${window.location.host}/torture-tracker/frontend/?vis-data=${data}`;
-        // let viewURL = `${window.location.protocol}//${window.location.host}/frontend/?vis-data=${data}`;
+        // let viewURL = `${window.location.protocol}//${window.location.host}/torture-tracker/frontend/?vis-data=${data}`;
+        let viewURL = `${window.location.protocol}//${window.location.host}/frontend/?vis-data=${data}`;
         console.log("Viewing:", agg[lang]); // TEST before aws update 
         let viewWindow = window.open(encodeURI(viewURL), '_blank');
         viewWindow.window.visData = agg[lang]; // send data this way instead of url
