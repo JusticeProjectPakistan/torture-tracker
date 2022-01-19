@@ -1,3 +1,28 @@
+<!-- Output copied to clipboard! -->
+
+<!-----
+
+Yay, no errors, warnings, or alerts!
+
+Conversion time: 0.8 seconds.
+
+
+Using this Markdown file:
+
+1. Paste this output into your source file.
+2. See the notes and action items below regarding this conversion run.
+3. Check the rendered output (headings, lists, code blocks, tables) for proper
+   formatting and use a linkchecker before you publish this page.
+
+Conversion notes:
+
+* Docs to Markdown version 1.0β33
+* Wed Jan 19 2022 05:18:36 GMT-0800 (PST)
+* Source doc: Torture Tracker Project Documentation
+----->
+
+
+
 # Torture Tracker Project Documentation
 
 13.12.2021
@@ -23,6 +48,8 @@ Currently, all Github services referenced herein are free, while the Amazon AWS 
 [https://justiceprojectpakistan.github.io/torture-tracker/frontend](https://justiceprojectpakistan.github.io/torture-tracker/frontend) 
 
 This section contains the user-facing narrative content provided by JPP.  It contains a visualization based on the database aggregates (containing survey answers) , a tracker timeline, and a link to the survey.
+
+The narrative URL accepts the parameter “lang” whose values can be either “ur” or “en” to set the text language.
 
 
 ### Timeline tracker
@@ -153,3 +180,5 @@ When integrating with the GitHub Torture Tracker your administrator has at least
 Your administrator should consult the relevant JPP team and providers for an appropriate solution for your use case.   
 
 In addition to the points noted above your administrator should, upon receipt of my deliverables, change all passwords, secret keys, tokens, etc. on Amazon and GitHub to ensure that my access is removed and maintain/review all content for security/appropriateness.
+
+**Note**: It is highly recommended that your administrator enable AWS multi-factor authentication. [https://console.aws.amazon.com/iamv2/home?#/home](https://console.aws.amazon.com/iamv2/home?#/home) 
