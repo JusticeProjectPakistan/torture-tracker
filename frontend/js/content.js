@@ -73,8 +73,8 @@ let defaultCopy = [{
       `<iframe src='${tlURL.en}' width='100%' height='100%' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0' style='height:60vh;'></iframe>`
     ),
     ur: makeQuestion(
-      "ہم کس طرح ",
-      " ترقی کریں",
+      "ہم آگے ",
+      "کیسے بڑھیں",
       "؟",
       `<iframe src='${tlURL.ur}' width='100%' height='100%' webkitallowfullscreen mozallowfullscreen allowfullscreen frameborder='0' style='height:60vh;'></iframe>`
     )
